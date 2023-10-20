@@ -3,7 +3,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +22,7 @@ public class appinialize extends Application {
         primaryStage.centerOnScreen();
         Image img = new Image("image/appI.jpg");
         primaryStage.getIcons().add(img);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
 

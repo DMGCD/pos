@@ -19,12 +19,14 @@ public class loginformcontroller {
     public AnchorPane root;
     public Button btnHost;
     public Button btnEmp;
+    public Label lblwarning;
 
     public void initialize(){
         txtusername.clear();
         txtusername.requestFocus();
         btnhost(false);
         btnEmp.setVisible(false);
+        lblwarning.setVisible(false);
     }
 
 
@@ -64,7 +66,11 @@ public class loginformcontroller {
             stage.setScene(scene);
             stage.setTitle("Host form");
             stage.centerOnScreen();
+            lblwarning.setVisible(false);
 
+        }
+        else{
+            lblwarning.setVisible(true);
         }
 
 
@@ -77,4 +83,10 @@ public class loginformcontroller {
     }
 
 
+    public void btnCreateOnAction(ActionEvent actionEvent) {
+
+
+
+
+    }
 }
