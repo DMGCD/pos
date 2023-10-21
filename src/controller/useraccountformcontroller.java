@@ -13,7 +13,12 @@ public class useraccountformcontroller {
     public PasswordField txtconfirmpassword;
     public AnchorPane root;
 
+
+
+
     public void btnRegisterOnAction(ActionEvent actionEvent) {
+
+
 
 
     }

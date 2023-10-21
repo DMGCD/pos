@@ -1,14 +1,154 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.hostformcontroller"
-            prefHeight="400.0" prefWidth="600.0">
-
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<AnchorPane fx:id="root" prefHeight="462.0" prefWidth="684.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hostformcontroller">
+   <children>
+      <Pane fx:id="subroot" layoutX="421.0" layoutY="226.0" prefHeight="198.0" prefWidth="257.0" style="-fx-border-color: black;">
+         <children>
+            <Label layoutX="6.0" layoutY="6.0" text="Update Username And Password">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtusernameupdate" layoutX="35.0" layoutY="62.0" prefHeight="25.0" prefWidth="207.0" promptText="New User Name" />
+            <TextField fx:id="txtpasswordupdate" layoutX="35.0" layoutY="118.0" prefHeight="25.0" prefWidth="207.0" promptText="New Host Password" />
+            <Label layoutX="14.0" layoutY="39.0" text="User Name" />
+            <Label layoutX="14.0" layoutY="96.0" text="Password" />
+            <Button layoutX="190.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnupdateOnAction" style="-fx-background-color: #d63031;" text="Update" textFill="#f5eeee">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="113.0" layoutY="158.0" mnemonicParsing="false" onAction="#btncancelOnAction" style="-fx-background-color: #44bd32;" text="Cancel" textFill="#f5f2f2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children></Pane>
+      <Group>
+         <children>
+            <Label layoutX="608.0" layoutY="147.0" onDragDetected="#btnProfileOnAction" style="-fx-border-color: ;" text="Profile">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+            <ImageView fitHeight="68.0" fitWidth="60.0" layoutX="596.0" layoutY="87.0" onDragDetected="#btnProfileOnAction" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: ;">
+               <image>
+                  <Image url="@../Image/profle.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Group>
+      <Label layoutX="255.0" layoutY="7.0" text="HOST">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+      <Separator layoutX="62.0" layoutY="52.0" prefHeight="17.0" prefWidth="560.0" />
+      <Group>
+         <children>
+            <ImageView fitHeight="55.0" fitWidth="59.0" layoutX="14.0" layoutY="3.0" onMouseClicked="#BackOnMouselicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/back.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label layoutX="28.0" layoutY="51.0" onMouseClicked="#BackOnMouselicked" text="Back ">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="483.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/download.jpeg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label layoutX="506.0" layoutY="148.0" text="Employe">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <Group>
+               <children>
+                  <ImageView fitHeight="68.0" fitWidth="65.0" layoutX="417.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Image/items.jpeg" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label layoutX="437.0" layoutY="148.0" text="Item ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group>
+         <children>
+            <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="350.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Image/1.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label layoutX="368.0" layoutY="147.0" text="Order">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </Group>
+      <Label layoutX="3.0" layoutY="109.0" text="Available Item " />
+      <TableView layoutY="126.0" prefHeight="326.0" prefWidth="235.0">
+        <columns>
+          <TableColumn prefWidth="155.0" text="Item" />
+          <TableColumn prefWidth="79.0" text="quantity" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblemployeemsg" layoutX="243.0" layoutY="190.0" text="Employee Message" />
+      <ListView fx:id="lstmsg" layoutX="246.0" layoutY="209.0" prefHeight="241.0" prefWidth="158.0" style="-fx-border-color: blue;" />
+      <Separator layoutX="267.0" layoutY="167.0" prefHeight="17.0" prefWidth="407.0" />
+   </children>
 </AnchorPane>
