@@ -14,11 +14,11 @@
       <Label layoutX="24.0" layoutY="250.0" text="Password" />
       <Label layoutX="24.0" layoutY="324.0" text="Confirm Password" />
       <Label layoutX="25.0" layoutY="183.0" text="Phone" />
-      <TextField fx:id="txtname" layoutX="46.0" layoutY="91.0" promptText="name" />
-      <TextField fx:id="txtusername" layoutX="46.0" layoutY="150.0" promptText="user name" />
-      <TextField fx:id="txtphone" layoutX="46.0" layoutY="209.0" promptText="Phone number" />
-      <PasswordField fx:id="txtpassword" layoutX="46.0" layoutY="278.0" promptText="Password" />
-      <PasswordField fx:id="txtconfirmpassword" layoutX="46.0" layoutY="352.0" promptText="confirm password" />
+      <TextField fx:id="txtname" layoutX="46.0" layoutY="91.0" onAction="#txtnameOnAction" promptText="name" />
+      <TextField fx:id="txtusername" layoutX="46.0" layoutY="150.0" onAction="#txtusernameOnAction" promptText="user name" />
+      <TextField fx:id="txtphone" layoutX="46.0" layoutY="209.0" onAction="#txtphoneOnaction" promptText="Phone number" />
+      <PasswordField fx:id="txtpassword" layoutX="46.0" layoutY="278.0" onAction="#txtpassowrdOnaction" promptText="Password" />
+      <PasswordField fx:id="txtconfirmpassword" layoutX="46.0" layoutY="352.0" onAction="#txtconfirmpasswordOnAction" promptText="confirm password" />
       <Label layoutX="66.0" layoutY="13.0" text="User Account Form">
          <font>
             <Font name="System Bold" size="18.0" />

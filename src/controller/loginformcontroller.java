@@ -6,18 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Objects;
+import java.util.Optional;
 
 public class loginformcontroller {
     public PasswordField txtpassword;
@@ -30,8 +26,11 @@ public class loginformcontroller {
     public Button btnemp;
 
     public void initialize(){
+        txtusername.requestFocus();
+        btnHost.setDisable(false);
+        btnCreateAccount.setVisible(false);
+        btnemp.setDisable(true);
 
-        firstcommnvisible(false,true);
     }
 
 
@@ -39,7 +38,7 @@ public class loginformcontroller {
 
 
     public void btnloginOnaction(ActionEvent actionEvent) throws IOException {
-        if(btnemp.isVisible()){
+        if(!btnemp.isDisabled()){
             login();
         }
         else{
@@ -53,56 +52,59 @@ public class loginformcontroller {
 
 
     public void btnCreateOnAction(ActionEvent actionEvent) throws IOException {
-
         Connection connection = DB.getInstance().getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select *from host where password =?");
-            preparedStatement.setObject(1,txtpassword.getText());
+            PreparedStatement preparedStatement = connection.prepareStatement("select *from host where username =? and password =?");
+            preparedStatement.setObject(1,txtusername.getText());
+            preparedStatement.setObject(2,txtpassword.getText());
+
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean next = resultSet.next();
+
             if(next){
-                Parent parent = FXMLLoader.load(this.getClass().getResource("../veiw/useraccountform.fxml"));
+                Parent parent =FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/useraccountform.fxml")));
                 Scene scene = new Scene(parent);
                 Stage stage = (Stage) root.getScene().getWindow();
                 stage.setScene(scene);
                 stage.centerOnScreen();
+
             }
             else{
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You Are Have Not Host Permission");
-                alert.showAndWait();
-                txtpassword.clear();
-                txtpassword.requestFocus();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Wrong User Name Or Password !",ButtonType.OK);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if(buttonType.get().equals(ButtonType.OK )){
+                    txtusername.clear();
+                    txtpassword.clear();
+                    txtusername.requestFocus();
+                }
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-
-
     }
 
     public void btnhostOnAction(ActionEvent actionEvent) {
-
-        firstcommnvisible(true,false);
+        txtusername.requestFocus();
+        btnHost.setDisable(true);
+        btnCreateAccount.setVisible(true);
+        btnemp.setDisable(false);
     }
 
     public void btnempOnAction(ActionEvent actionEvent) {
-
-        firstcommnvisible(false,true);
-    }
-
-    public void firstcommnvisible(boolean x,boolean y){
         txtusername.requestFocus();
-        btnemp.setVisible(x);
-        btnCreateAccount.setVisible(x);
-        btnHost.setVisible(y);
+        btnemp.setDisable(true);
+        btnHost.setDisable(false);
+        btnCreateAccount.setVisible(false);
     }
+
 
     public void txtpasswordOnAction(ActionEvent actionEvent) {
 
         if (!txtusername.getText().isEmpty()){
             txtpassword.requestFocus();
-            if(btnemp.isVisible()){
+            if(!btnemp.isDisable()){
                 login();
             }
             else{
@@ -132,19 +134,24 @@ public class loginformcontroller {
             String password = txtpassword.getText();
             Connection connection = DB.getInstance().getConnection();
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement("select *from host where username =? and password=?");
+                PreparedStatement preparedStatement = connection.prepareStatement("select *from host where username =? and password=? and hid=?");
                 preparedStatement.setObject(1,username);
                 preparedStatement.setObject(2,password);
+                preparedStatement.setObject(3,1);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 boolean match = resultSet.next();
                 if (match) {
 
-                    Parent parent = FXMLLoader.load(this.getClass().getResource("../veiw/hostform.fxml"));
+                    Parent parent = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/hostform.fxml")));
                     Scene scene = new Scene(parent);
                     Stage stage =(Stage) root.getScene().getWindow();
                     stage.setTitle("Host");
                     stage.setScene(scene);
                     stage.centerOnScreen();
+                }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Wrong User Name Or Password !");
+                    alert.showAndWait();
                 }
 
 
