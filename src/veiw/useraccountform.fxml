@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" prefHeight="444.0" prefWidth="262.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.useraccountformcontroller">
+<AnchorPane fx:id="root" prefHeight="476.0" prefWidth="261.0" style="-fx-background-color: #7bed9f;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.useraccountformcontroller">
    <children>
       <Label layoutX="24.0" layoutY="65.0" text="Name" />
       <Label layoutX="24.0" layoutY="124.0" text="Username" />
@@ -19,12 +19,12 @@
       <TextField fx:id="txtphone" layoutX="46.0" layoutY="209.0" onAction="#txtphoneOnaction" promptText="Phone number" />
       <PasswordField fx:id="txtpassword" layoutX="46.0" layoutY="278.0" onAction="#txtpassowrdOnaction" promptText="Password" />
       <PasswordField fx:id="txtconfirmpassword" layoutX="46.0" layoutY="352.0" onAction="#txtconfirmpasswordOnAction" promptText="confirm password" />
-      <Label layoutX="66.0" layoutY="13.0" text="User Account Form">
+      <Label layoutX="52.0" layoutY="14.0" text="User Account Form">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="169.0" layoutY="405.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" text="Register">
+      <Button layoutX="169.0" layoutY="434.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" text="Register">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -32,7 +32,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="20.0" layoutY="405.0" mnemonicParsing="false" onAction="#btnBackOnAction" text="Back">
+      <Button layoutX="28.0" layoutY="434.0" mnemonicParsing="false" onAction="#btnBackOnAction" text="Back">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
