@@ -25,6 +25,10 @@ public class useraccountformcontroller {
     public PasswordField txtconfirmpassword;
     public AnchorPane root;
 
+    public void initialize(){
+        colurborder("transparant");
+    }
+
 
 
 
@@ -81,18 +85,20 @@ public class useraccountformcontroller {
         String confirmp = txtconfirmpassword.getText();
         String empid = empid();
         if(password.equals(confirmp)){
+            colurborder("transparant");
             Connection connection = DB.getInstance().getConnection();
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement("insert into emp(empid,name,phone,username,password) values(?,?,?,?,?)");
-                preparedStatement.setObject(1,empid);
-                preparedStatement.setObject(2,txtname.getText());
-                preparedStatement.setObject(3,txtphone.getText());
-                preparedStatement.setObject(4,txtusername.getText());
-                preparedStatement.setObject(5,txtpassword.getText());
-                preparedStatement.executeUpdate();
+
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Registered As Employee !", ButtonType.OK);
                 Optional<ButtonType> buttonType = alert.showAndWait();
                 if(buttonType.get().equals(ButtonType.OK)){
+                    PreparedStatement preparedStatement = connection.prepareStatement("insert into emp(empid,name,phone,username,password) values(?,?,?,?,?)");
+                    preparedStatement.setObject(1,empid);
+                    preparedStatement.setObject(2,txtname.getText());
+                    preparedStatement.setObject(3,txtphone.getText());
+                    preparedStatement.setObject(4,txtusername.getText());
+                    preparedStatement.setObject(5,txtpassword.getText());
+                    preparedStatement.executeUpdate();
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION, "If You Want To Add Another Employe !", ButtonType.YES, ButtonType.NO);
                     Optional<ButtonType> buttonType1 = alert1.showAndWait();
                     if(buttonType1.equals(ButtonType.NO)){
@@ -103,6 +109,7 @@ public class useraccountformcontroller {
                         stage.centerOnScreen();
                     }
                     else{
+
                         clear();
                     }
                 }
@@ -111,7 +118,12 @@ public class useraccountformcontroller {
             }
         }
         else{
-            System.out.println("no");
+
+            txtpassword.clear();
+            txtpassword.requestFocus();
+            txtconfirmpassword.clear();
+            colurborder("red");
+
         }
 
 
@@ -160,5 +172,10 @@ public class useraccountformcontroller {
         txtphone.clear();
         txtusername.clear();
         txtname.requestFocus();
+    }
+
+    public void colurborder(String n){
+        txtpassword.setStyle("-fx-border-color:"+n);
+        txtconfirmpassword.setStyle("-fx-border-color:"+n);
     }
 }
