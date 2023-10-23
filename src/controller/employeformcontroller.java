@@ -54,4 +54,13 @@ public class employeformcontroller {
     public void btnAddnoteOnMouseCleck(MouseEvent mouseEvent) {
 
     }
+
+    public void txtaddOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnaddOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnsaveOnAction(ActionEvent actionEvent) {
+    }
 }

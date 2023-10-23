@@ -41,10 +41,10 @@ public class loginformcontroller {
         if(!btnemp.isDisabled()){
             login();
         }
-        else{
-            txtusername.clear();
-            txtpassword.clear();
-            txtusername.requestFocus();
+        else if(btnemp.isDisabled()){
+            emplogin();
+
+
         }
     }
 
@@ -97,6 +97,7 @@ public class loginformcontroller {
         btnemp.setDisable(true);
         btnHost.setDisable(false);
         btnCreateAccount.setVisible(false);
+
     }
 
 
@@ -107,10 +108,8 @@ public class loginformcontroller {
             if(!btnemp.isDisable()){
                 login();
             }
-            else{
-                txtusername.clear();
-                txtpassword.clear();
-                txtusername.requestFocus();
+            else if(btnemp.isDisabled()){
+                emplogin();
             }
         }
 
@@ -161,6 +160,43 @@ public class loginformcontroller {
 
 
         }
+
+    }
+
+
+    public void emplogin(){
+
+        if(!txtusername.getText().isEmpty() && !txtpassword.getText().isEmpty()){
+
+            Connection connection = DB.getInstance().getConnection();
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement("select *from emp where username=? and password=?");
+                preparedStatement.setObject(1,txtusername.getText());
+                preparedStatement.setObject(2,txtpassword.getText());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                boolean next = resultSet.next();
+                if(next){
+
+                    Parent parent =FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/employeform.fxml")));
+                    Scene scene = new Scene(parent);
+                    Stage stage = (Stage) root.getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.centerOnScreen();
+
+                }
+                else{
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Wrong User Name Or Password !");
+                     alert.showAndWait();
+                     txtpassword.clear();
+                     txtusername.clear();
+                     txtusername.requestFocus();
+                }
+            } catch (SQLException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
 
     }
 }

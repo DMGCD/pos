@@ -63,8 +63,8 @@
       </Group>
       <Pane fx:id="subrootnote" layoutX="373.0" layoutY="225.0" prefHeight="112.0" prefWidth="215.0" style="-fx-border-color: white;">
          <children>
-            <TextField layoutX="27.0" layoutY="25.0" prefHeight="31.0" prefWidth="172.0" promptText="Add Host Note" style="-fx-background-radius: 5px;" />
-            <Button layoutX="154.0" layoutY="73.0" mnemonicParsing="false" style="-fx-background-color: blue;" text="+Add" textFill="#fffafa">
+            <TextField fx:id="txtnote" layoutX="27.0" layoutY="25.0" onAction="#txtaddOnAction" prefHeight="31.0" prefWidth="172.0" promptText="Add Host Note" style="-fx-background-radius: 5px;" />
+            <Button layoutX="154.0" layoutY="73.0" mnemonicParsing="false" onAction="#btnaddOnAction" style="-fx-background-color: blue;" text="+Add" textFill="#fffafa">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
@@ -78,7 +78,7 @@
             <PasswordField layoutX="13.0" layoutY="87.0" promptText="New Password" style="-fx-background-radius: 5px;" />
             <PasswordField layoutX="14.0" layoutY="135.0" promptText="New Confirm Password" style="-fx-background-radius: 5px;" />
             <TextField layoutX="13.0" layoutY="40.0" promptText="New User Name" style="-fx-background-radius: 5px;" />
-            <Button layoutX="122.0" layoutY="179.0" mnemonicParsing="false" style="-fx-background-color: #4834d4;" text="Save" textFill="#fcf6f6">
+            <Button layoutX="122.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnsaveOnAction" style="-fx-background-color: #4834d4;" text="Save" textFill="#fcf6f6">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
