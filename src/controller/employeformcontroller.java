@@ -158,10 +158,25 @@ public class employeformcontroller {
         String note = txtnote.getText();
         Connection connection = DB.getInstance().getConnection();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into note (empid,note) values(?,?) ");
-            preparedStatement.setObject(1,Empid);
-            preparedStatement.setObject(2,txtnote.getText());
-            int i = preparedStatement.executeUpdate();
+            if(!note.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "If You Want Add The Note For Host",ButtonType.YES,ButtonType.NO);
+                Optional<ButtonType> buttonType = alert.showAndWait();
+                if(buttonType.get().equals(ButtonType.YES)){
+                    PreparedStatement preparedStatement = connection.prepareStatement("insert into note (empid,note) values(?,?) ");
+                    preparedStatement.setObject(1,Empid);
+                    preparedStatement.setObject(2,txtnote.getText());
+                    int i = preparedStatement.executeUpdate();
+                    txtnote.clear();
+                    subrootnote.setDisable(true);
+                }
+
+
+            }
+            else{
+                System.out.println("11");
+
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
