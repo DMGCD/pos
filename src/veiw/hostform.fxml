@@ -11,7 +11,8 @@
 
 <AnchorPane fx:id="root" prefHeight="462.0" prefWidth="684.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hostformcontroller">
    <children>
-      <Pane fx:id="subroot" layoutX="421.0" layoutY="226.0" prefHeight="198.0" prefWidth="257.0" style="-fx-border-color: black;">
+      <Pane layoutX="315.0" layoutY="70.0" prefHeight="113.0" prefWidth="359.0" style="-fx-border-color: black;" />
+      <Pane fx:id="subroot" layoutX="418.0" layoutY="251.0" prefHeight="198.0" prefWidth="257.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="6.0" layoutY="6.0" text="Update Username And Password">
                <font>
@@ -35,7 +36,7 @@
          </children></Pane>
       <Group>
          <children>
-            <Label layoutX="608.0" layoutY="147.0" onDragDetected="#btnProfileOnAction" text="Profile">
+            <Label layoutX="604.0" layoutY="147.0" onMouseClicked="#btnprofileOnMouseClicked" text="Profile">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -43,7 +44,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <ImageView fitHeight="68.0" fitWidth="60.0" layoutX="596.0" layoutY="87.0" onDragDetected="#btnProfileOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="68.0" fitWidth="60.0" layoutX="592.0" layoutY="87.0" onMouseClicked="#btnprofileOnMouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/profle.png" />
                </image>
@@ -53,15 +54,15 @@
             </ImageView>
          </children>
       </Group>
-      <Label layoutX="255.0" layoutY="7.0" text="HOST">
+      <Label layoutX="255.0" layoutY="6.0" text="HOST">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Label>
-      <Separator layoutX="62.0" layoutY="52.0" prefHeight="17.0" prefWidth="560.0" />
+      <Separator layoutX="62.0" layoutY="47.0" prefHeight="17.0" prefWidth="560.0" />
       <Group>
          <children>
-            <ImageView fitHeight="55.0" fitWidth="59.0" layoutX="14.0" layoutY="3.0" onMouseClicked="#BackOnMouselicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="55.0" fitWidth="59.0" layoutX="1.0" layoutY="3.0" onMouseClicked="#BackOnMouselicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/back.png" />
                </image>
@@ -69,7 +70,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="28.0" layoutY="51.0" onMouseClicked="#BackOnMouselicked" text="Back ">
+            <Label layoutX="15.0" layoutY="51.0" onMouseClicked="#BackOnMouselicked" text="Back ">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -81,7 +82,7 @@
       </Group>
       <Group>
          <children>
-            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="483.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="477.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/download.jpeg" />
                </image>
@@ -89,7 +90,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="506.0" layoutY="148.0" text="Employe">
+            <Label layoutX="500.0" layoutY="148.0" text="Employe">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -101,9 +102,9 @@
       </Group>
       <Group>
          <children>
-            <Group>
+            <Group layoutY="5.0">
                <children>
-                  <ImageView fitHeight="68.0" fitWidth="65.0" layoutX="417.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="68.0" fitWidth="65.0" layoutX="404.0" layoutY="88.0" onMouseClicked="#btnItemimageMouseOnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/items.jpeg" />
                      </image>
@@ -111,7 +112,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Label layoutX="437.0" layoutY="148.0" text="Item ">
+                  <Label layoutX="424.0" layoutY="148.0" onMouseClicked="#btnItemimageMouseOnAction" text="Item ">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -125,7 +126,7 @@
       </Group>
       <Group>
          <children>
-            <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="350.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="320.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/1.jpg" />
                </image>
@@ -133,7 +134,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="368.0" layoutY="147.0" text="Order">
+            <Label layoutX="332.0" layoutY="147.0" text="Update">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -143,15 +144,22 @@
             </Label>
          </children>
       </Group>
-      <Label layoutX="3.0" layoutY="109.0" text="Available Item " />
-      <TableView layoutY="126.0" prefHeight="326.0" prefWidth="235.0">
+      <Label layoutX="7.0" layoutY="109.0" text="Available Item " />
+      <TableView layoutX="4.0" layoutY="126.0" prefHeight="326.0" prefWidth="235.0">
         <columns>
           <TableColumn prefWidth="155.0" text="Item" />
           <TableColumn prefWidth="79.0" text="quantity" />
         </columns>
       </TableView>
-      <Label fx:id="lblemployeemsg" layoutX="243.0" layoutY="190.0" text="Employee Message" />
-      <ListView fx:id="lstmsg" layoutX="246.0" layoutY="209.0" prefHeight="241.0" prefWidth="158.0" style="-fx-border-color: blue;" />
-      <Separator layoutX="267.0" layoutY="167.0" prefHeight="17.0" prefWidth="407.0" />
+      <Label fx:id="lblemployeemsg" layoutX="247.0" layoutY="190.0" text="Employee Message" />
+      <ListView fx:id="lstmsg" layoutX="247.0" layoutY="209.0" prefHeight="241.0" prefWidth="158.0" style="-fx-border-color: blue;" />
+      <ImageView fx:id="imgclose" fitHeight="25.0" fitWidth="29.0" layoutX="653.0" layoutY="224.0" onMouseClicked="#closeimgeOnmouseclicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Image/close.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" prefHeight="582.0" prefWidth="611.0" style="-fx-background-color: #81ecec;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.itemformcontroller">
+   <children>
+      <TableView layoutX="21.0" layoutY="44.0" prefHeight="270.0" prefWidth="570.0">
+        <columns>
+            <TableColumn prefWidth="76.0" text="Item_Id" />
+          <TableColumn prefWidth="256.0" text="name" />
+          <TableColumn prefWidth="97.0" text="Price" />
+            <TableColumn prefWidth="56.0" text="Quantity" />
+            <TableColumn prefWidth="84.0" text="Total_price" />
+        </columns>
+      </TableView>
+      <Label layoutX="267.0" layoutY="2.0" text="ITEM" textFill="#1b1a1a">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Pane fx:id="subrootaddnew" layoutX="21.0" layoutY="355.0" prefHeight="108.0" prefWidth="570.0" style="-fx-background-color: #576574; -fx-background-radius: 5px;">
+         <children>
+            <Label layoutX="28.0" layoutY="12.0" text="Name" textFill="#f8f7f7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="215.0" layoutY="12.0" text="Price" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="402.0" layoutY="12.0" text="Quantity" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="txtiname" layoutX="28.0" layoutY="35.0" onAction="#txtinameOnaction" promptText="Item Name" />
+            <TextField fx:id="txtprice" layoutX="215.0" layoutY="35.0" onAction="#txtpriceOnAction" promptText="Item Price" />
+            <TextField fx:id="txtquantity" layoutX="402.0" layoutY="35.0" onAction="#txtquantityonAction" promptText="Item Quantity" />
+            <Button layoutX="509.0" layoutY="69.0" mnemonicParsing="false" onAction="#btnsaveOnAction" style="-fx-background-color: #ff9f43;" text="Save">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btncanceladd" layoutX="401.0" layoutY="69.0" mnemonicParsing="false" onAction="#btncanceladdnewOnAction" text="Cansel">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Button layoutX="21.0" layoutY="323.0" mnemonicParsing="false" onAction="#btnAddnewOnAction" style="-fx-background-color: #6c5ce7;" text="+Add New Item" textFill="#fcfafa">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="21.0" layoutY="471.0" mnemonicParsing="false" onAction="#btnremoveOnAction" style="-fx-background-color: #ee5253;" text="Remove" textFill="#f8f4f4">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Pane fx:id="subrootremove" layoutX="21.0" layoutY="502.0" prefHeight="70.0" prefWidth="196.0" style="-fx-background-color: #01a3a4; -fx-background-radius: 5px;">
+         <children>
+            <TextField fx:id="txtremoveitemid" layoutX="25.0" layoutY="13.0" onAction="#txtremoveitemidOnAction" promptText="Type Item ID" />
+            <Button layoutX="117.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnremoveinpaneOnAction" style="-fx-background-color: #ee5253;" text="Remove">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font></Button>
+            <Button fx:id="btncanselremove" layoutX="56.0" layoutY="41.0" mnemonicParsing="false" onAction="#btncancelremveOnAction" text="Cansel">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </Pane>
+      <Button layoutX="531.0" layoutY="544.0" mnemonicParsing="false" onAction="#btngoback" style="-fx-background-color: #ff9f43; -fx-background-radius: 5px;" text="Go Back">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
