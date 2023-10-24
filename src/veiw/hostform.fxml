@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
+
 <AnchorPane fx:id="root" prefHeight="462.0" prefWidth="684.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hostformcontroller">
    <children>
       <Pane fx:id="subroot" layoutX="421.0" layoutY="226.0" prefHeight="198.0" prefWidth="257.0" style="-fx-border-color: black;">
@@ -32,7 +35,7 @@
          </children></Pane>
       <Group>
          <children>
-            <Label layoutX="608.0" layoutY="147.0" onDragDetected="#btnProfileOnAction" style="-fx-border-color: ;" text="Profile">
+            <Label layoutX="608.0" layoutY="147.0" onDragDetected="#btnProfileOnAction" text="Profile">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -40,7 +43,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <ImageView fitHeight="68.0" fitWidth="60.0" layoutX="596.0" layoutY="87.0" onDragDetected="#btnProfileOnAction" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: ;">
+            <ImageView fitHeight="68.0" fitWidth="60.0" layoutX="596.0" layoutY="87.0" onDragDetected="#btnProfileOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/profle.png" />
                </image>

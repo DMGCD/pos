@@ -1,6 +1,5 @@
 package controller;
 
-import com.mysql.cj.PreparedQuery;
 import db.DB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +10,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Optional;
 
 public class loginformcontroller {
     public PasswordField txtpassword;
+    public static String Empid;
 
     public TextField txtusername;
- 
+
     public AnchorPane root;
     public Button btnHost;
     public Button btnCreateAccount;
@@ -30,6 +33,7 @@ public class loginformcontroller {
         btnHost.setDisable(false);
         btnCreateAccount.setVisible(false);
         btnemp.setDisable(true);
+        colurborder("transparent");
 
     }
 
@@ -140,6 +144,7 @@ public class loginformcontroller {
                 ResultSet resultSet = preparedStatement.executeQuery();
                 boolean match = resultSet.next();
                 if (match) {
+                    colurborder("transparent");
 
                     Parent parent = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/hostform.fxml")));
                     Scene scene = new Scene(parent);
@@ -149,8 +154,12 @@ public class loginformcontroller {
                     stage.centerOnScreen();
                 }
                 else {
+                    colurborder("red");
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Wrong User Name Or Password !");
                     alert.showAndWait();
+                    txtusername.clear();
+                    txtusername.requestFocus();
+                    txtpassword.clear();
                 }
 
 
@@ -158,6 +167,9 @@ public class loginformcontroller {
                 throw new RuntimeException(e);
             }
 
+
+        }
+        else{
 
         }
 
@@ -175,7 +187,11 @@ public class loginformcontroller {
                 preparedStatement.setObject(2,txtpassword.getText());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 boolean next = resultSet.next();
+
+
                 if(next){
+                    colurborder("transparent");
+                    Empid=resultSet.getString(1);
 
                     Parent parent =FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/employeform.fxml")));
                     Scene scene = new Scene(parent);
@@ -183,8 +199,10 @@ public class loginformcontroller {
                     stage.setScene(scene);
                     stage.centerOnScreen();
 
+
                 }
                 else{
+                    colurborder("red");
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Wrong User Name Or Password !");
                      alert.showAndWait();
                      txtpassword.clear();
@@ -198,5 +216,9 @@ public class loginformcontroller {
 
 
 
+    }
+    public void colurborder(String n){
+        txtpassword.setStyle("-fx-border-color:"+n);
+        txtusername.setStyle("-fx-border-color:"+n);
     }
 }

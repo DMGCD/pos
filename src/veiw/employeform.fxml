@@ -75,9 +75,9 @@
             <Label layoutX="14.0" layoutY="23.0" text="Username" />
             <Label layoutX="14.0" layoutY="70.0" text="New Password" />
             <Label layoutX="14.0" layoutY="119.0" text="Confirm New Password" />
-            <PasswordField layoutX="13.0" layoutY="87.0" promptText="New Password" style="-fx-background-radius: 5px;" />
-            <PasswordField layoutX="14.0" layoutY="135.0" promptText="New Confirm Password" style="-fx-background-radius: 5px;" />
-            <TextField layoutX="13.0" layoutY="40.0" promptText="New User Name" style="-fx-background-radius: 5px;" />
+            <PasswordField fx:id="txtnewpassword" layoutX="13.0" layoutY="87.0" onAction="#txtnewpasswordOnAction" promptText="New Password" style="-fx-background-radius: 5px;" />
+            <PasswordField fx:id="txtnewconfirmpassword" layoutX="14.0" layoutY="135.0" onAction="#txtconfirmOnAction" promptText="New Confirm Password" style="-fx-background-radius: 5px;" />
+            <TextField fx:id="txtnewusername" layoutX="13.0" layoutY="40.0" onAction="#txtnewusernamOnActon" promptText="New User Name" style="-fx-background-radius: 5px;" />
             <Button layoutX="122.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnsaveOnAction" style="-fx-background-color: #4834d4;" text="Save" textFill="#fcf6f6">
                <font>
                   <Font name="System Bold" size="12.0" />
