@@ -103,6 +103,7 @@ public class employeformcontroller {
     }
 
     public void txtconfirmOnAction(ActionEvent actionEvent) {
+
         savenewemp();
     }
 

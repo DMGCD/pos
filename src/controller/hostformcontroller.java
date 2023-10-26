@@ -31,12 +31,18 @@ public class hostformcontroller {
     public Label lblemployeemsg;
     public ListView<employemsgTM> lstmsg;
     public ImageView imgclose;
+    public Button btnlistdelete;
+    public Button btncancel;
+    employemsgTM getitem;
 
     public void initialize(){
+        getmessage();
         subroot.setVisible(false);
         lstmsg.setVisible(true);
         imgclose.setVisible(false);
         loadlist();
+        btnlistdelete.setVisible(false);
+        btncancel.setVisible(false);
 
         lstmsg.getSelectionModel().clearSelection();
         // Anonymouse inner class
@@ -44,10 +50,13 @@ public class hostformcontroller {
             @Override
             public void changed(ObservableValue<? extends employemsgTM> observable, employemsgTM oldValue, employemsgTM newValue) {
 
-                employemsgTM getitem = lstmsg.getSelectionModel().getSelectedItem();
+                 getitem = lstmsg.getSelectionModel().getSelectedItem();
 
-
-
+                if(getitem==null){
+                    return;
+                }
+                btnlistdelete.setVisible(true);
+                btncancel.setVisible(true);
 
 
 
@@ -158,7 +167,9 @@ public class hostformcontroller {
             while(resultSet.next()){
 
                 String desc = resultSet.getString(3);
-                items.add(new employemsgTM(desc));
+                String empid = resultSet.getString(2);
+                int nid = resultSet.getInt(1);
+                items.add(new employemsgTM(desc,empid,nid));
 
             }
             lstmsg.refresh();
@@ -166,5 +177,41 @@ public class hostformcontroller {
             throw new RuntimeException(e);
         }
 
+    }
+
+
+
+    public void btndeletelistOnAction(ActionEvent actionEvent) {
+        btncancel.setVisible(false);
+        Connection connection = DB.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from note where nid =?");
+            preparedStatement.setObject(1,getitem.getNid());
+            preparedStatement.executeUpdate();
+            loadlist();
+            btnlistdelete.setVisible(false);
+            lstmsg.getSelectionModel().clearSelection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        lstmsg.refresh();
+
+    }
+
+    public void getmessage(){
+        ObservableList<employemsgTM> items = lstmsg.getItems();
+        if(!items.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.show();
+
+        }
+
+    }
+
+    public void btncancelOnaction(ActionEvent actionEvent) {
+        btncancel.setVisible(false);
+        btnlistdelete.setVisible(false);
+        lstmsg.getSelectionModel().clearSelection();
+        lstmsg.refresh();
     }
 }

@@ -161,5 +161,18 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Button fx:id="btnlistdelete" layoutX="418.0" layoutY="212.0" mnemonicParsing="false" onAction="#btndeletelistOnAction" text="Delete">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btncancel" layoutX="477.0" layoutY="212.0" mnemonicParsing="false" onAction="#btncancelOnaction" style="-fx-background-color: #7f8c8d;" text="Cancel" textFill="#fffdfd">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>
