@@ -32,7 +32,7 @@ public class loginformcontroller {
         txtusername.requestFocus();
         btnHost.setDisable(false);
         btnCreateAccount.setVisible(false);
-        btnemp.setDisable(true);
+        btnemp.setDisable(false);
         colurborder("transparent");
 
     }
@@ -42,10 +42,10 @@ public class loginformcontroller {
 
 
     public void btnloginOnaction(ActionEvent actionEvent) throws IOException {
-        if(!btnemp.isDisabled()){
+        if(!btnemp.isDisabled() && btnHost.isDisabled()){
             login();
         }
-        else if(btnemp.isDisabled()){
+        else if(btnemp.isDisabled() && !btnHost.isDisabled()){
             emplogin();
 
 
@@ -109,10 +109,10 @@ public class loginformcontroller {
 
         if (!txtusername.getText().isEmpty()){
             txtpassword.requestFocus();
-            if(!btnemp.isDisable()){
+            if(!btnemp.isDisable() && btnHost.isDisabled()){
                 login();
             }
-            else if(btnemp.isDisabled()){
+            else if(btnemp.isDisabled() && !btnHost.isDisabled()){
                 emplogin();
             }
         }

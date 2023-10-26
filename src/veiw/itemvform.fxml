@@ -10,13 +10,13 @@
 
 <AnchorPane fx:id="root" prefHeight="582.0" prefWidth="611.0" style="-fx-background-color: #81ecec;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.itemformcontroller">
    <children>
-      <TableView layoutX="21.0" layoutY="44.0" prefHeight="270.0" prefWidth="570.0">
+      <TableView fx:id="tblitem" layoutX="21.0" layoutY="44.0" prefHeight="270.0" prefWidth="570.0" stylesheets="@../c.css">
         <columns>
-            <TableColumn prefWidth="76.0" text="Item_Id" />
-          <TableColumn prefWidth="256.0" text="name" />
-          <TableColumn prefWidth="97.0" text="Price" />
-            <TableColumn prefWidth="56.0" text="Quantity" />
-            <TableColumn prefWidth="84.0" text="Total_price" />
+            <TableColumn fx:id="tblitemidcolumn" prefWidth="76.0" text="Item_Id" />
+          <TableColumn fx:id="tblnamecolomn" prefWidth="256.0" styleClass=".age-column {    -fx-alignment: center-right;}" text="name" />
+          <TableColumn fx:id="tblpricecolumn" prefWidth="97.0" text="Price" />
+            <TableColumn fx:id="tblquantitycolumn" prefWidth="56.0" text="Quantity" />
+            <TableColumn fx:id="tbltotalpricecolumn" prefWidth="84.0" text="Total_price" />
         </columns>
       </TableView>
       <Label layoutX="267.0" layoutY="2.0" text="ITEM" textFill="#1b1a1a">
@@ -64,7 +64,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="21.0" layoutY="471.0" mnemonicParsing="false" onAction="#btnremoveOnAction" style="-fx-background-color: #ee5253;" text="Remove" textFill="#f8f4f4">
+      <Button layoutX="21.0" layoutY="481.0" mnemonicParsing="false" onAction="#btnremoveOnAction" style="-fx-background-color: #ee5253;" text="Remove" textFill="#f8f4f4">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -72,17 +72,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Pane fx:id="subrootremove" layoutX="21.0" layoutY="502.0" prefHeight="70.0" prefWidth="196.0" style="-fx-background-color: #01a3a4; -fx-background-radius: 5px;">
+      <Pane fx:id="subrootremove" layoutX="87.0" layoutY="481.0" prefHeight="86.0" prefWidth="196.0" style="-fx-background-color: #01a3a4; -fx-background-radius: 5px;">
          <children>
-            <TextField fx:id="txtremoveitemid" layoutX="25.0" layoutY="13.0" onAction="#txtremoveitemidOnAction" promptText="Type Item ID" />
-            <Button layoutX="117.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnremoveinpaneOnAction" style="-fx-background-color: #ee5253;" text="Remove">
+            <TextField fx:id="txtremoveitemid" layoutX="25.0" layoutY="13.0" onAction="#txtremoveitemidOnAction" prefHeight="25.0" prefWidth="156.0" promptText="Type Item ID" />
+            <Button layoutX="122.0" layoutY="51.0" mnemonicParsing="false" onAction="#btnremoveinpaneOnAction" style="-fx-background-color: #ee5253;" text="Remove">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <font>
                   <Font name="System Bold" size="11.0" />
                </font></Button>
-            <Button fx:id="btncanselremove" layoutX="56.0" layoutY="41.0" mnemonicParsing="false" onAction="#btncancelremveOnAction" text="Cansel">
+            <Button fx:id="btncanselremove" layoutX="57.0" layoutY="50.0" mnemonicParsing="false" onAction="#btncancelremveOnAction" text="Cansel">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -26,7 +26,7 @@ public class useraccountformcontroller {
     public AnchorPane root;
 
     public void initialize(){
-        colurborder("transparant");
+        colurborder("transparent");
     }
 
 
@@ -85,7 +85,7 @@ public class useraccountformcontroller {
         String confirmp = txtconfirmpassword.getText();
         String empid = empid();
         if(password.equals(confirmp)){
-            colurborder("transparant");
+            colurborder("transparent");
             Connection connection = DB.getInstance().getConnection();
             try {
 

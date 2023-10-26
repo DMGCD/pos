@@ -1,16 +1,16 @@
 package controller;
 
+import TM.itemtable;
 import db.DB;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -31,12 +31,37 @@ public class itemformcontroller {
     public TextField txtremoveitemid;
     public Button btncanceladd;
     public Button btncanselremove;
+    public TableView <itemtable>tblitem;
+    public TableColumn<itemtable,String> tblitemidcolumn;
+    public TableColumn<itemtable,String> tblnamecolomn;
+    public TableColumn<itemtable,String> tblpricecolumn;
+    public TableColumn<itemtable,String> tblquantitycolumn;
+    public TableColumn<itemtable,String> tbltotalpricecolumn;
+
 
     public void initialize(){
         subrootaddnew.setDisable(true);
         subrootremove.setDisable(true);
         btncanceladd.setDisable(true);
         btncanselremove.setDisable(true);
+        setdetailsTable();
+        tblitem.getSelectionModel().clearSelection();
+
+        loadtableitem();
+
+        tblitem.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<itemtable>() {
+            @Override
+            public void changed(ObservableValue<? extends itemtable> observable, itemtable oldValue, itemtable newValue) {
+
+                itemtable selectedItem = tblitem.getSelectionModel().getSelectedItem();
+                if(!subrootremove.isDisable()){
+
+                    tblitem.refresh();
+                    txtremoveitemid.setText(selectedItem.getId());
+                }
+            }
+        });
+        
 
 
     }
@@ -62,13 +87,19 @@ public class itemformcontroller {
             txtquantity.requestFocus();
         }
     }
+// enter and save the new items
 
     public void txtquantityonAction(ActionEvent actionEvent) {
         if(!txtiname.getText().isEmpty() && !txtprice.getText().isEmpty() && !txtquantity.getText().isEmpty()){
             getitem();
+            showthelastitems();
+            tblitem.refresh();
+            tblitem.getSelectionModel().clearSelection();
+
         }
         else{
             subrootaddnew.setDisable(true);
+            tblitem.getSelectionModel().clearSelection();
             btncanceladd.setDisable(true);
         }
     }
@@ -76,10 +107,14 @@ public class itemformcontroller {
     public void btnsaveOnAction(ActionEvent actionEvent) {
         if(!txtiname.getText().isEmpty() && !txtprice.getText().isEmpty() && !txtquantity.getText().isEmpty()){
             getitem();
+            showthelastitems();
+            tblitem.getSelectionModel().clearSelection();
+
         }
         else{
             subrootaddnew.setDisable(true);
             btncanceladd.setDisable(true);
+            tblitem.getSelectionModel().clearSelection();
         }
 
     }
@@ -87,6 +122,7 @@ public class itemformcontroller {
     public void btnAddnewOnAction(ActionEvent actionEvent) {
         subrootaddnew.setDisable(false);
         btncanceladd.setDisable(false);
+        tblitem.getSelectionModel().clearSelection();
 
 
     }
@@ -95,17 +131,26 @@ public class itemformcontroller {
     public void btnremoveOnAction(ActionEvent actionEvent) {
         subrootremove.setDisable(false);
         btncanselremove.setDisable(false);
+        tblitem.setDisable(false);
         txtremoveitemid.requestFocus();
+        tblitem.refresh();
+        tblitem.getSelectionModel().clearSelection();
 
     }
 
     public void txtremoveitemidOnAction(ActionEvent actionEvent) {
         if(!txtremoveitemid.getText().isEmpty()){
             removemethod();
+            afterremovetablerefresh();
+            tblitem.getSelectionModel().clearSelection();
+
+
         }
         else{
             subrootremove.setDisable(true);
             btncanselremove.setDisable(true);
+            tblitem.getSelectionModel().clearSelection();
+
         }
 
 
@@ -114,10 +159,17 @@ public class itemformcontroller {
     public void btnremoveinpaneOnAction(ActionEvent actionEvent) {
         if(!txtremoveitemid.getText().isEmpty()){
             removemethod();
+            afterremovetablerefresh();
+            tblitem.getSelectionModel().clearSelection();
+
+
+
         }
         else{
             subrootremove.setDisable(true);
+            tblitem.setDisable(true);
             btncanselremove.setDisable(true);
+            tblitem.getSelectionModel().clearSelection();
         }
 
     }
@@ -260,6 +312,7 @@ public class itemformcontroller {
         txtprice.clear();
         subrootaddnew.setDisable(true);
         btncanceladd.setDisable(true);
+        tblitem.getSelectionModel().clearSelection();
 
     }
 
@@ -267,5 +320,120 @@ public class itemformcontroller {
         txtremoveitemid.clear();
         subrootremove.setDisable(true);
         btncanselremove.setVisible(true);
+        tblitem.getSelectionModel().clearSelection();
+
     }
-}
+
+    // initialize for table to where colomn is its aurthorized
+    
+    public void setdetailsTable(){
+
+       tblitemidcolumn.setCellValueFactory(new PropertyValueFactory<itemtable,String>("id"));
+        tblnamecolomn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tblpricecolumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        tblquantitycolumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        tbltotalpricecolumn.setCellValueFactory(new PropertyValueFactory<>("total_price"));
+    }
+    
+    public void loadtableitem(){
+        int itemCount = 0,i=1;
+
+        Connection connection = DB.getInstance().getConnection();
+
+        try {
+
+
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery("select *from item");
+                Statement statement1 = connection.createStatement();
+                ResultSet resultSet1 = statement1.executeQuery("SELECT COUNT(*) AS item_count FROM item");
+                boolean next1 = resultSet1.next();
+            int row = resultSet.getRow();
+
+
+            if(next1){
+                    itemCount = resultSet1.getInt("item_count");
+
+                }
+                i =itemCount;
+                 resultSet.next();
+            while(i>0) {
+
+
+
+                           String id = resultSet.getString(1);
+                           String name = resultSet.getString(2);
+                           String quantity = resultSet.getString(3);
+                           String itemprice = resultSet.getString(4);
+                           String totalP = resultSet.getString(6);
+                           ObservableList<itemtable> itemstore = tblitem.getItems();
+                           itemstore.add(new itemtable(id, name, itemprice, quantity, totalP));
+                resultSet.next();
+                tblitem.refresh();
+
+
+                   i--;
+
+
+               }
+
+
+
+
+
+
+
+
+
+
+
+
+            } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+
+    }
+
+    public void showthelastitems(){
+        Connection connection = DB.getInstance().getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select *from item order by itemid desc limit 1");
+            boolean next = resultSet.next();
+            if(next){
+
+                String id = resultSet.getString(1);
+                String name = resultSet.getString(2);
+                String quantity = resultSet.getString(3);
+                String itemprice = resultSet.getString(4);
+                String totalP = resultSet.getString(6);
+                ObservableList<itemtable> itemstore = tblitem.getItems();
+                itemstore.add(new itemtable(id, name, itemprice, quantity, totalP));
+                tblitem.refresh();
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        ;
+    }
+
+    public void afterremovetablerefresh(){
+        ObservableList<itemtable> items = tblitem.getItems();
+        items.clear();
+        loadtableitem();
+        tblitem.refresh();
+        tblitem.getSelectionModel().clearSelection();
+
+    }
+
+
+
+
+
+
+
+
+    }
+
