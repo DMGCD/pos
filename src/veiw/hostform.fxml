@@ -152,7 +152,7 @@
         </columns>
       </TableView>
       <Label fx:id="lblemployeemsg" layoutX="247.0" layoutY="190.0" text="Employee Message" />
-      <ListView fx:id="lstmsg" layoutX="247.0" layoutY="209.0" prefHeight="241.0" prefWidth="158.0" style="-fx-border-color: blue;" />
+      <ListView fx:id="lstmsg" layoutX="247.0" layoutY="209.0" prefHeight="241.0" prefWidth="165.0" style="-fx-border-color: blue;" />
       <ImageView fx:id="imgclose" fitHeight="25.0" fitWidth="29.0" layoutX="653.0" layoutY="224.0" onMouseClicked="#closeimgeOnmouseclicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Image/close.png" />
