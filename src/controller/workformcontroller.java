@@ -55,6 +55,7 @@ public class workformcontroller {
                    txtitemid.setText(select.getId());
                    lblquntity.setText(Integer.toString(select.getAvailable()));
                    txtgetqunty.requestFocus();
+                   tblitememp.getSelectionModel().clearSelection();
                    tblitememp.refresh();
                }
                else{
@@ -231,6 +232,7 @@ public class workformcontroller {
         txtgetqunty.setVisible(x);
         lblquntity.setVisible(x);
         lblitemid.setVisible(x);
+        btnaddbill.setVisible(x);
 
 
     }
