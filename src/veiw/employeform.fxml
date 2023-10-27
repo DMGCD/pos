@@ -1,150 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="root" prefHeight="450.0" prefWidth="604.0" style="-fx-background-color: skyblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.employeformcontroller">
-   <children>
-      <Label layoutX="202.0" text="Employe" textFill="#1b1a1a">
-         <font>
-            <Font name="System Bold" size="40.0" />
-         </font>
-      </Label>
-      <Button layoutX="528.0" layoutY="411.0" mnemonicParsing="false" onAction="#btnLogoutOnAction" style="-fx-background-color: gold;" text="Log Out" textFill="#08091b">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <Lighting>
-               <bumpInput>
-                  <Shadow />
-               </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
-            </Lighting>
-         </effect>
-      </Button>
-      <Separator layoutX="87.0" layoutY="60.0" prefHeight="19.0" prefWidth="430.0" />
-      <Group>
-         <children>
-            <ImageView fitHeight="56.0" fitWidth="54.0" layoutX="437.0" layoutY="103.0" onMouseClicked="#btnWorkOnMouseClicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Image/L.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <effect>
-                  <Lighting>
-                     <bumpInput>
-                        <Bloom />
-                     </bumpInput>
-                     <light>
-                        <Light.Distant azimuth="0.0" />
-                     </light>
-                  </Lighting>
-               </effect>
-            </ImageView>
-            <Label layoutX="448.0" layoutY="99.0" onMouseClicked="#btnWorkOnMouseClicked" prefHeight="20.0" prefWidth="42.0" text="WORK">
-               <font>
-                  <Font name="System Bold" size="10.0" />
-               </font></Label>
-         </children>
-      </Group>
-      <Pane fx:id="subrootnote" layoutX="373.0" layoutY="225.0" prefHeight="112.0" prefWidth="215.0" style="-fx-border-color: white;">
-         <children>
-            <TextField fx:id="txtnote" layoutX="27.0" layoutY="25.0" onAction="#txtaddOnAction" prefHeight="31.0" prefWidth="172.0" promptText="Add Host Note" style="-fx-background-radius: 5px;" />
-            <Button layoutX="154.0" layoutY="73.0" mnemonicParsing="false" onAction="#btnaddOnAction" style="-fx-background-color: blue;" text="+Add" textFill="#fffafa">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-         </children>
-      </Pane>
-      <Pane fx:id="subrootchange" layoutX="22.0" layoutY="218.0" prefHeight="218.0" prefWidth="178.0" style="-fx-border-color: white;">
-         <children>
-            <Label layoutX="14.0" layoutY="23.0" text="Username" />
-            <Label layoutX="14.0" layoutY="70.0" text="New Password" />
-            <Label layoutX="14.0" layoutY="119.0" text="Confirm New Password" />
-            <PasswordField fx:id="txtnewpassword" layoutX="13.0" layoutY="87.0" onAction="#txtnewpasswordOnAction" promptText="New Password" style="-fx-background-radius: 5px;" />
-            <PasswordField fx:id="txtnewconfirmpassword" layoutX="14.0" layoutY="135.0" onAction="#txtconfirmOnAction" promptText="New Confirm Password" style="-fx-background-radius: 5px;" />
-            <TextField fx:id="txtnewusername" layoutX="13.0" layoutY="40.0" onAction="#txtnewusernamOnActon" promptText="New User Name" style="-fx-background-radius: 5px;" />
-            <Button layoutX="122.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnsaveOnAction" style="-fx-background-color: #4834d4;" text="Save" textFill="#fcf6f6">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
-      <Button layoutX="22.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnchangeOnAction" style="-fx-background-color: #fffa65; -fx-background-radius: 5px;" text="Change">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Group>
-         <children>
-            <ImageView fitHeight="58.0" fitWidth="56.0" layoutX="533.0" layoutY="102.0" onMouseClicked="#btnAddnoteOnMouseCleck" pickOnBounds="true" preserveRatio="true">
-               <effect>
-                  <Lighting bumpInput="$null">
-                     <light>
-                        <Light.Distant />
-                     </light>
-                  </Lighting>
-               </effect>
-               <image>
-                  <Image url="@../Image/note%203.jpeg" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <Label layoutX="541.0" layoutY="103.0" onMouseClicked="#btnAddnoteOnMouseCleck" text="Add Note">
-               <font>
-                  <Font name="System Bold" size="10.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </children>
-      </Group>
-      <Label fx:id="lblusernamehostpermission" layoutX="186.0" layoutY="119.0" style="-fx-border-color: white;" text="Label">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblpasswordhostpermission" layoutX="186.0" layoutY="155.0" style="-fx-border-color: white;" text="Label">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="22.0" layoutY="118.0" text="Host permission username" />
-      <Label layoutX="22.0" layoutY="155.0" text="Host permission password" />
-      <ImageView fx:id="imgclose" fitHeight="15.0" fitWidth="20.0" layoutX="573.0" layoutY="211.0" onMouseClicked="#imgcloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Image/close.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-   </children>
-   <effect>
-      <InnerShadow />
-   </effect>
+<AnchorPane fx:id="root" prefHeight="450.0" prefWidth="604.0" style="-fx-background-color: skyblue;"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.employeformcontroller">
+    <children>
+        <Label layoutX="202.0" text="Employe" textFill="#1b1a1a">
+            <font>
+                <Font name="System Bold" size="40.0"/>
+            </font>
+        </Label>
+        <Button layoutX="528.0" layoutY="411.0" mnemonicParsing="false" onAction="#btnLogoutOnAction"
+                style="-fx-background-color: gold;" text="Log Out" textFill="#08091b">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <effect>
+                <Lighting>
+                    <bumpInput>
+                        <Shadow/>
+                    </bumpInput>
+                    <light>
+                        <Light.Distant/>
+                    </light>
+                </Lighting>
+            </effect>
+        </Button>
+        <Separator layoutX="87.0" layoutY="60.0" prefHeight="19.0" prefWidth="430.0"/>
+        <Group>
+            <children>
+                <ImageView fitHeight="56.0" fitWidth="54.0" layoutX="437.0" layoutY="103.0"
+                           onMouseClicked="#btnWorkOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../Image/L.png"/>
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <effect>
+                        <Lighting>
+                            <bumpInput>
+                                <Bloom/>
+                            </bumpInput>
+                            <light>
+                                <Light.Distant azimuth="0.0"/>
+                            </light>
+                        </Lighting>
+                    </effect>
+                </ImageView>
+                <Label layoutX="448.0" layoutY="99.0" onMouseClicked="#btnWorkOnMouseClicked" prefHeight="20.0"
+                       prefWidth="42.0" text="WORK">
+                    <font>
+                        <Font name="System Bold" size="10.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Group>
+        <Pane fx:id="subrootnote" layoutX="373.0" layoutY="225.0" prefHeight="112.0" prefWidth="215.0"
+              style="-fx-border-color: white;">
+            <children>
+                <TextField fx:id="txtnote" layoutX="27.0" layoutY="25.0" onAction="#txtaddOnAction" prefHeight="31.0"
+                           prefWidth="172.0" promptText="Add Host Note" style="-fx-background-radius: 5px;"/>
+                <Button layoutX="154.0" layoutY="73.0" mnemonicParsing="false" onAction="#btnaddOnAction"
+                        style="-fx-background-color: blue;" text="+Add" textFill="#fffafa">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+        <Pane fx:id="subrootchange" layoutX="22.0" layoutY="218.0" prefHeight="218.0" prefWidth="178.0"
+              style="-fx-border-color: white;">
+            <children>
+                <Label layoutX="14.0" layoutY="23.0" text="Username"/>
+                <Label layoutX="14.0" layoutY="70.0" text="New Password"/>
+                <Label layoutX="14.0" layoutY="119.0" text="Confirm New Password"/>
+                <PasswordField fx:id="txtnewpassword" layoutX="13.0" layoutY="87.0" onAction="#txtnewpasswordOnAction"
+                               promptText="New Password" style="-fx-background-radius: 5px;"/>
+                <PasswordField fx:id="txtnewconfirmpassword" layoutX="14.0" layoutY="135.0"
+                               onAction="#txtconfirmOnAction" promptText="New Confirm Password"
+                               style="-fx-background-radius: 5px;"/>
+                <TextField fx:id="txtnewusername" layoutX="13.0" layoutY="40.0" onAction="#txtnewusernamOnActon"
+                           promptText="New User Name" style="-fx-background-radius: 5px;"/>
+                <Button layoutX="122.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnsaveOnAction"
+                        style="-fx-background-color: #4834d4;" text="Save" textFill="#fcf6f6">
+                    <font>
+                        <Font name="System Bold" size="12.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </Pane>
+        <Button layoutX="22.0" layoutY="189.0" mnemonicParsing="false" onAction="#btnchangeOnAction"
+                style="-fx-background-color: #fffa65; -fx-background-radius: 5px;" text="Change">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+        <Group>
+            <children>
+                <ImageView fitHeight="58.0" fitWidth="56.0" layoutX="533.0" layoutY="102.0"
+                           onMouseClicked="#btnAddnoteOnMouseCleck" pickOnBounds="true" preserveRatio="true">
+                    <effect>
+                        <Lighting bumpInput="$null">
+                            <light>
+                                <Light.Distant/>
+                            </light>
+                        </Lighting>
+                    </effect>
+                    <image>
+                        <Image url="@../Image/note%203.jpeg"/>
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Label layoutX="541.0" layoutY="103.0" onMouseClicked="#btnAddnoteOnMouseCleck" text="Add Note">
+                    <font>
+                        <Font name="System Bold" size="10.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+            </children>
+        </Group>
+        <Label fx:id="lblusernamehostpermission" layoutX="186.0" layoutY="119.0" style="-fx-border-color: white;"
+               text="Label">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Label>
+        <Label fx:id="lblpasswordhostpermission" layoutX="186.0" layoutY="155.0" style="-fx-border-color: white;"
+               text="Label">
+            <font>
+                <Font name="System Bold" size="12.0"/>
+            </font>
+        </Label>
+        <Label layoutX="22.0" layoutY="118.0" text="Host permission username"/>
+        <Label layoutX="22.0" layoutY="155.0" text="Host permission password"/>
+        <ImageView fx:id="imgclose" fitHeight="15.0" fitWidth="20.0" layoutX="573.0" layoutY="211.0"
+                   onMouseClicked="#imgcloseOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../Image/close.png"/>
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </ImageView>
+    </children>
+    <effect>
+        <InnerShadow/>
+    </effect>
 </AnchorPane>

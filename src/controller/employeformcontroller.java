@@ -62,7 +62,7 @@ public class employeformcontroller {
 
     public void btnWorkOnMouseClicked(MouseEvent mouseEvent) throws IOException {
 
-        Parent parent = FXMLLoader.load(this.getClass().getResource("../veiw/workform.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/workform.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(scene);
