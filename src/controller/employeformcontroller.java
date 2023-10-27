@@ -5,19 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -31,11 +27,17 @@ public class employeformcontroller {
     public TextField txtnewusername;
     public String Empid;
     public TextField txtnote;
+    public Label lblusernamehostpermission;
+    public Label lblpasswordhostpermission;
+    public ImageView imgclose;
 
     public void initialize(){
         subrootchange.setDisable(true);
         subrootnote.setDisable(true);
+        imgclose.setVisible(false);
         this.Empid =loginformcontroller.Empid;
+
+        showhostpermission();
 
 
 
@@ -60,6 +62,15 @@ public class employeformcontroller {
 
     public void btnWorkOnMouseClicked(MouseEvent mouseEvent) {
 
+
+    }
+
+    public void imgcloseOnMouseClicked(MouseEvent mouseEvent) {
+
+        subrootnote.setDisable(true);
+        imgclose.setVisible(false);
+        txtnote.clear();
+
     }
 
     public void btnchangeOnAction(ActionEvent actionEvent) {
@@ -71,6 +82,7 @@ public class employeformcontroller {
 
     public void btnAddnoteOnMouseCleck(MouseEvent mouseEvent) {
         subrootnote.setDisable(false);
+        imgclose.setVisible(true);
         txtnote.requestFocus();
 
 
@@ -80,6 +92,7 @@ public class employeformcontroller {
         addnote();
         txtnote.clear();
         subrootnote.setDisable(true);
+        imgclose.setVisible(false);
     }
 
     public void btnaddOnAction(ActionEvent actionEvent) {
@@ -90,7 +103,25 @@ public class employeformcontroller {
     }
 
     public void btnsaveOnAction(ActionEvent actionEvent) {
-        savenewemp();
+        if(!txtnewpassword.getText().isEmpty() && !txtnewconfirmpassword.getText().isEmpty() && !txtnewusername.getText().isEmpty()){
+            savenewemp();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You Want Change the User name and Password !", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if(buttonType.get().equals(ButtonType.YES)){
+                txtnewusername.clear();
+                txtnewconfirmpassword.clear();
+                txtnewpassword.clear();
+                txtnewusername.requestFocus();
+            }
+            else{
+                txtnewusername.clear();
+                txtnewconfirmpassword.clear();
+                txtnewpassword.clear();
+                subrootchange.setDisable(true);
+            }
+        }
 
     }
 //txt field onaction method
@@ -104,7 +135,25 @@ public class employeformcontroller {
 
     public void txtconfirmOnAction(ActionEvent actionEvent) {
 
-        savenewemp();
+        if(!txtnewpassword.getText().isEmpty() && !txtnewconfirmpassword.getText().isEmpty() && !txtnewusername.getText().isEmpty()){
+            savenewemp();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You Want Change the User name and Password !", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> buttonType = alert.showAndWait();
+            if(buttonType.equals(ButtonType.YES)){
+                txtnewusername.clear();
+                txtnewconfirmpassword.clear();
+                txtnewpassword.clear();
+                txtnewusername.requestFocus();
+            }
+            else{
+                txtnewusername.clear();
+                txtnewconfirmpassword.clear();
+                txtnewpassword.clear();
+                subrootchange.setDisable(true);
+            }
+        }
     }
 
     public void txtnewusernamOnActon(ActionEvent actionEvent) {
@@ -169,6 +218,7 @@ public class employeformcontroller {
                     int i = preparedStatement.executeUpdate();
                     txtnote.clear();
                     subrootnote.setDisable(true);
+                    imgclose.setVisible(false);
                 }
 
 
@@ -183,4 +233,21 @@ public class employeformcontroller {
 
 
     }
+    public void showhostpermission(){
+        Connection connection = DB.getInstance().getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select *from host where hid=2");
+            boolean next = resultSet.next();
+            if(next){
+                lblusernamehostpermission.setText(resultSet.getString(2));
+                lblpasswordhostpermission.setText(resultSet.getString(3));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
