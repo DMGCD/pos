@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane fx:id="root" prefHeight="464.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.workformcontroller">
+   <children>
+      <TableView fx:id="tblview" layoutX="14.0" layoutY="98.0" prefHeight="354.0" prefWidth="371.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="143.0" text="Name" />
+            <TableColumn prefWidth="77.0" text="Price" />
+            <TableColumn prefWidth="75.0" text="Available" />
+        </columns>
+      </TableView>
+      <Pane fx:id="subroot" layoutX="430.0" layoutY="125.0" prefHeight="136.0" prefWidth="191.0" style="-fx-border-color: black; -fx-border-radius: 5px;">
+         <children>
+            <Button layoutX="130.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaddONaction" text="Add">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="txtgetQunty" layoutX="22.0" layoutY="68.0" onAction="#txtgetquntyOnAction" promptText="Get Quantity">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font></TextField>
+            <TextField fx:id="txtID" layoutX="22.0" layoutY="31.0" prefHeight="25.0" prefWidth="59.0" promptText="item ID">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TextField>
+            <Label layoutX="22.0" layoutY="9.0" text="Item ID">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="95.0" layoutY="9.0" text="Available">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAvailble" layoutX="154.0" layoutY="9.0" text="Label" />
+         </children>
+      </Pane>
+      <Button layoutX="430.0" layoutY="97.0" mnemonicParsing="false" onAction="#btnNewOnAction" text="New Bill">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="557.0" layoutY="427.0" mnemonicParsing="false" text="Show Bill">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="581.0" layoutY="14.0" text="Bill ID" />
+      <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnGoBackOnAction" text="Go Back">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Lighting bumpInput="$null" diffuseConstant="1.28" specularConstant="0.74" specularExponent="34.42" surfaceScale="4.99">
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+   </children>
 </AnchorPane>
