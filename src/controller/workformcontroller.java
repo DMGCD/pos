@@ -33,18 +33,23 @@ public class workformcontroller {
     public TextField txtID;
     public String bid;
     public Label lblAvailble;
+    public Label lbltotal;
+    public Label lblpricelbl;
     int priceget;
     String iname;
     int available;
     int iget;
     String selectID;
-
-
+    int balance;
+int sum;
     public void initialize(){
         definecolumn();
+        lbltotal.setText("0");
         loadTable();
+        tblview.setDisable(true);
         txtID.setDisable(true);
         subroot.setVisible(false);
+        lbltotlisvi(false);
         tblview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<tableviewTM>() {
             @Override
             public void changed(ObservableValue<? extends tableviewTM> observable, tableviewTM oldValue, tableviewTM newValue) {
@@ -114,23 +119,25 @@ public void loadTable(){
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) {
+        lbltotlisvi(true);
         bid =idgenarateBIl();
         subroot.setVisible(true);
+        tblview.setDisable(false);
 
     }
 // new one bill ad the bil table;
     public void btnaddONaction(ActionEvent actionEvent) {
-        adbilmethod();
-        updateItemTable();
         tblview.getItems().clear();
+        adbilmethod();
+
         loadTable();
         tblview.refresh();
 
     }
     public void txtgetquntyOnAction(ActionEvent actionEvent) {
-        adbilmethod();
-        updateItemTable();
         tblview.getItems().clear();
+        adbilmethod();
+
         loadTable();
         tblview.refresh();
     }
@@ -200,12 +207,20 @@ public void loadTable(){
     public void adbilmethod(){
         iget= Integer.parseInt(txtgetQunty.getText());
 
-        if(available>=iget){
+        if(available>=iget && iget>0){
             intobilltable();
             txtID.clear();
             txtgetQunty.clear();
             lblAvailble.setText("0");
             tblview.requestFocus();
+            updateItemTable();
+
+            totalbalnce();
+            sum+=balance;
+            lbltotal.setText(Integer.toString(sum));
+
+
+
         }
         else{
 
@@ -227,6 +242,29 @@ public void updateItemTable(){
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
+}
+
+public void totalbalnce(){
+
+    Connection connection = DB.getInstance().getConnection();
+    try {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select *from bil order by id desc limit 1");
+
+        if(resultSet.next()){
+            String balnceprice = resultSet.getString(4);
+            balance =Integer.parseInt(balnceprice);
+
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+
+
+}
+public void lbltotlisvi(Boolean x){
+        lbltotal.setVisible(x);
+        lblpricelbl.setVisible(x);
 }
 
 }
