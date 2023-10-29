@@ -9,12 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -31,10 +27,12 @@ public class workformcontroller {
     public Pane subroot;
     public TextField txtgetQunty;
     public TextField txtID;
-    public String bid;
+    public static  String bid;
     public Label lblAvailble;
     public Label lbltotal;
     public Label lblpricelbl;
+    public Button btnshowbil;
+    public Label lblbillid;
     int priceget;
     String iname;
     int available;
@@ -44,6 +42,8 @@ public class workformcontroller {
 int sum;
     public void initialize(){
         definecolumn();
+        lblbillid.setText("000");
+        btnshowbil.setDisable(true);
         lbltotal.setText("0");
         loadTable();
         tblview.setDisable(true);
@@ -89,7 +89,8 @@ public void definecolumn(){
 
 }
 public void loadTable(){
-    Connection connection = DB.getInstance().getConnection();
+        tblview.getItems().clear();
+        Connection connection = DB.getInstance().getConnection();
     try {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("Select *from item");
@@ -119,25 +120,26 @@ public void loadTable(){
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) {
+        btnshowbil.setDisable(false);
+        lbltotal.setText("0000");
+        lbltotal.autosize();
         lbltotlisvi(true);
         bid =idgenarateBIl();
+        lblbillid.setText(bid);
         subroot.setVisible(true);
         tblview.setDisable(false);
-
+        sum=0;
     }
 // new one bill ad the bil table;
     public void btnaddONaction(ActionEvent actionEvent) {
-        tblview.getItems().clear();
         adbilmethod();
-
         loadTable();
         tblview.refresh();
 
+
     }
     public void txtgetquntyOnAction(ActionEvent actionEvent) {
-        tblview.getItems().clear();
         adbilmethod();
-
         loadTable();
         tblview.refresh();
     }
@@ -172,8 +174,8 @@ public void loadTable(){
     }
 
 // ID Genarate function for Create bil ID
-    public String idgenarateBIl(){
-        String BID =null;
+    public  String idgenarateBIl(){
+        String BID;
         Connection connection = DB.getInstance().getConnection();
         try {
             Statement statement = connection.createStatement();
@@ -194,7 +196,7 @@ public void loadTable(){
 
             }
             else {
-                BID="B1";
+                BID="B01";
                 return  BID;
             }
         } catch (SQLException e) {
@@ -207,7 +209,7 @@ public void loadTable(){
     public void adbilmethod(){
         iget= Integer.parseInt(txtgetQunty.getText());
 
-        if(available>=iget && iget>0){
+        if(available>=iget && iget>0 && !txtID.getText().isEmpty()){
             intobilltable();
             txtID.clear();
             txtgetQunty.clear();
@@ -267,4 +269,15 @@ public void lbltotlisvi(Boolean x){
         lblpricelbl.setVisible(x);
 }
 
+// ****************** Show bill button
+    public void btnOnactionShowbil(ActionEvent actionEvent) throws IOException {
+        Parent parent =FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/showbillform.fxml")));
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+        btnshowbil.setDisable(false);
+
+    }
 }
