@@ -11,24 +11,24 @@
 
 <AnchorPane fx:id="root" prefHeight="462.0" prefWidth="684.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hostformcontroller">
    <children>
-      <Pane layoutX="315.0" layoutY="70.0" prefHeight="113.0" prefWidth="359.0" style="-fx-border-color: black;" />
-      <Pane fx:id="subroot" layoutX="418.0" layoutY="251.0" prefHeight="198.0" prefWidth="257.0" style="-fx-border-color: black;">
+      <Pane layoutX="320.0" layoutY="70.0" prefHeight="113.0" prefWidth="359.0" style="-fx-border-color: black;" />
+      <Pane fx:id="subroot" layoutX="440.0" layoutY="251.0" prefHeight="198.0" prefWidth="239.0" style="-fx-border-color: black;">
          <children>
-            <Label layoutX="6.0" layoutY="6.0" text="Update Username And Password">
+            <Label layoutX="6.0" layoutY="6.0" text="Update Username And Password ">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="txtusernameupdate" layoutX="35.0" layoutY="62.0" prefHeight="25.0" prefWidth="207.0" promptText="New User Name" />
-            <TextField fx:id="txtpasswordupdate" layoutX="35.0" layoutY="118.0" prefHeight="25.0" prefWidth="207.0" promptText="New Host Password" />
-            <Label layoutX="14.0" layoutY="39.0" text="User Name" />
-            <Label layoutX="14.0" layoutY="96.0" text="Password" />
-            <Button layoutX="190.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnupdateOnAction" style="-fx-background-color: #d63031;" text="Update" textFill="#f5eeee">
+            <TextField fx:id="txtusernameupdate" layoutX="17.0" layoutY="62.0" prefHeight="25.0" prefWidth="207.0" promptText="New User Name" />
+            <TextField fx:id="txtpasswordupdate" layoutX="19.0" layoutY="118.0" prefHeight="25.0" prefWidth="207.0" promptText="New Host Password" />
+            <Label layoutX="17.0" layoutY="39.0" text="User Name" />
+            <Label layoutX="17.0" layoutY="96.0" text="Password" />
+            <Button layoutX="170.0" layoutY="158.0" mnemonicParsing="false" onAction="#btnupdateOnAction" style="-fx-background-color: #d63031;" text="Update" textFill="#f5eeee">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="113.0" layoutY="158.0" mnemonicParsing="false" onAction="#btncancelOnAction" style="-fx-background-color: #44bd32;" text="Cancel" textFill="#f5f2f2">
+            <Button layoutX="109.0" layoutY="158.0" mnemonicParsing="false" onAction="#btncancelOnAction" style="-fx-background-color: #44bd32;" text="Cancel" textFill="#f5f2f2">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -126,7 +126,7 @@
       </Group>
       <Group>
          <children>
-            <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="320.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="328.0" layoutY="94.0" onDragDetected="#btnUpdatOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/1.jpg" />
                </image>
@@ -134,7 +134,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="332.0" layoutY="147.0" text="Update">
+            <Label layoutX="342.0" layoutY="147.0" onDragDetected="#btnUpdatOnAction" text="Update">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -145,15 +145,16 @@
          </children>
       </Group>
       <Label layoutX="7.0" layoutY="109.0" text="Available Item " />
-      <TableView layoutX="4.0" layoutY="126.0" prefHeight="326.0" prefWidth="235.0">
+      <TableView fx:id="tblHostView" layoutX="4.0" layoutY="126.0" prefHeight="326.0" prefWidth="257.0">
         <columns>
-          <TableColumn prefWidth="155.0" text="Item" />
-          <TableColumn prefWidth="79.0" text="quantity" />
+          <TableColumn prefWidth="48.0" text="Item ID" />
+          <TableColumn prefWidth="120.0" text="Item Name" />
+            <TableColumn prefWidth="88.0" text="Item Quantity" />
         </columns>
       </TableView>
-      <Label fx:id="lblemployeemsg" layoutX="247.0" layoutY="190.0" text="Employee Message" />
-      <ListView fx:id="lstmsg" layoutX="247.0" layoutY="209.0" prefHeight="241.0" prefWidth="165.0" style="-fx-border-color: blue;" />
-      <ImageView fx:id="imgclose" fitHeight="25.0" fitWidth="29.0" layoutX="653.0" layoutY="224.0" onMouseClicked="#closeimgeOnmouseclicked" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lblemployeemsg" layoutX="272.0" layoutY="232.0" text="Employee Message" />
+      <ListView fx:id="lstmsg" layoutX="272.0" layoutY="251.0" prefHeight="165.0" prefWidth="145.0" style="-fx-border-color: blue;" />
+      <ImageView fx:id="imgclose" fitHeight="25.0" fitWidth="29.0" layoutX="654.0" layoutY="226.0" onMouseClicked="#closeimgeOnmouseclicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Image/close.png" />
          </image>
@@ -161,12 +162,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Button fx:id="btnlistdelete" layoutX="418.0" layoutY="212.0" mnemonicParsing="false" onAction="#btndeletelistOnAction" text="Delete">
+      <Button fx:id="btnlistdelete" layoutX="306.0" layoutY="422.0" mnemonicParsing="false" onAction="#btndeletelistOnAction" text="Delete">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btncancel" layoutX="477.0" layoutY="212.0" mnemonicParsing="false" onAction="#btncancelOnaction" style="-fx-background-color: #7f8c8d;" text="Cancel" textFill="#fffdfd">
+      <Button fx:id="btncancel" layoutX="363.0" layoutY="423.0" mnemonicParsing="false" onAction="#btncancelOnaction" style="-fx-background-color: #7f8c8d;" text="Cancel" textFill="#fffdfd">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

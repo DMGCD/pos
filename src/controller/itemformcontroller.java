@@ -37,6 +37,9 @@ public class itemformcontroller {
     public TableColumn<itemtable,String> tblpricecolumn;
     public TableColumn<itemtable,String> tblquantitycolumn;
     public TableColumn<itemtable,String> tbltotalpricecolumn;
+    public TextField txtnewQuantity;
+    public TextField txtnewprice;
+    public TextField txtNewname;
 
 
     public void initialize(){
@@ -430,11 +433,10 @@ public class itemformcontroller {
     }
 
 
-
-
-
-
-
-
+    public void btnUpdataINSubrootONAction(ActionEvent actionEvent) {
     }
+
+    public void btnCancelInSubrootOnAction(ActionEvent actionEvent) {
+    }
+}
 

@@ -1,6 +1,7 @@
 package controller;
 
 import TM.employemsgTM;
+import TM.tblHost;
 import db.DB;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,10 +35,13 @@ public class hostformcontroller {
     public ImageView imgclose;
     public Button btnlistdelete;
     public Button btncancel;
+    public TableView <tblHost>tblHostView;
     employemsgTM getitem;
 
     public void initialize(){
         getmessage();
+        initializeColumn();
+        tableLoad();
         subroot.setVisible(false);
         lstmsg.setVisible(true);
         imgclose.setVisible(false);
@@ -84,8 +89,33 @@ public class hostformcontroller {
         txtusernameupdate.requestFocus();
     }
 
+public void initializeColumn(){
 
+        tblHostView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        tblHostView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        tblHostView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+}
+ public void tableLoad(){
 
+    tblHostView.getItems().clear();
+     Connection connection = DB.getInstance().getConnection();
+     try {
+         Statement statement = connection.createStatement();
+         ResultSet resultSet = statement.executeQuery("select *from item");
+         while(resultSet.next()){
+             String itemId = resultSet.getString(1);
+             String itemName = resultSet.getString(2);
+             int itemRemaining = resultSet.getInt(5);
+             ObservableList<tblHost> items = tblHostView.getItems();
+             items.add(new tblHost(itemId,itemName,itemRemaining));
+             tblHostView.refresh();
+
+         }
+
+     } catch (SQLException e) {
+         throw new RuntimeException(e);
+     }
+ }
     public void BackOnMouselicked(MouseEvent mouseEvent) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You Logout From Host", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
@@ -181,6 +211,7 @@ public class hostformcontroller {
 
 
 
+
     public void btndeletelistOnAction(ActionEvent actionEvent) {
         btncancel.setVisible(false);
         Connection connection = DB.getInstance().getConnection();
@@ -213,5 +244,10 @@ public class hostformcontroller {
         btnlistdelete.setVisible(false);
         lstmsg.getSelectionModel().clearSelection();
         lstmsg.refresh();
+    }
+
+    public void btnUpdatOnAction(MouseEvent mouseEvent) {
+
+
     }
 }
