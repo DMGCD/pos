@@ -54,27 +54,19 @@ int sum;
             @Override
             public void changed(ObservableValue<? extends tableviewTM> observable, tableviewTM oldValue, tableviewTM newValue) {
                 tableviewTM select = tblview.getSelectionModel().getSelectedItem();
-                lblAvailble.setText(Integer.toString(select.getQunty()));
-                txtgetQunty.requestFocus();
-                priceget =select.getPrice();
-                available=select.getQunty();
-                iname =select.getName();
-                txtID.setText(select.getId());
-                selectID=select.getId();
+                if(select!=null){
+                    priceget =select.getPrice();
+                    available=select.getQunty();
+                    iname =select.getName();
+                    txtID.setText(select.getId());
+                    selectID=select.getId();
+                    lblAvailble.setText(Integer.toString(select.getQunty()));
+                    txtgetQunty.requestFocus();
+                    tblview.refresh();
 
-
-
-                tblview.getSelectionModel().clearSelection();
-                if(select==null){
-                    return;
                 }
-                tblview.refresh();
-
-
             }
         });
-
-
 }
 
 // *****************************************************table function
@@ -86,10 +78,9 @@ public void definecolumn(){
     tblview.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("price"));
     tblview.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("qunty"));
     tblview.refresh();
-
 }
 public void loadTable(){
-        tblview.getItems().clear();
+       tblview.getItems().clear();
         Connection connection = DB.getInstance().getConnection();
     try {
         Statement statement = connection.createStatement();
@@ -101,8 +92,9 @@ public void loadTable(){
             int qunty =Integer.parseInt(resultSet.getString(5));
             ObservableList<tableviewTM> items = tblview.getItems();
             items.add(new tableviewTM(id,name,price,qunty));
-            tblview.refresh();
+
         }
+        tblview.refresh();
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
@@ -134,18 +126,18 @@ public void loadTable(){
     public void btnaddONaction(ActionEvent actionEvent) {
         adbilmethod();
         loadTable();
+        clr();
         tblview.refresh();
-
-
     }
     public void txtgetquntyOnAction(ActionEvent actionEvent) {
         adbilmethod();
         loadTable();
+        clr();
         tblview.refresh();
     }
 // insert to bill table data
     public void intobilltable(){
-        int balnce = Integer.parseInt(txtgetQunty.getText()) *priceget;
+        int balnce = iget*priceget;
         int qunty;
         Connection connection = DB.getInstance().getConnection();
         try {
@@ -207,7 +199,14 @@ public void loadTable(){
     }
     //****************************
     public void adbilmethod(){
-        iget= Integer.parseInt(txtgetQunty.getText());
+
+        if(txtgetQunty.getText().isEmpty()){
+            iget=1;
+        }
+        else{
+            iget= Integer.parseInt(txtgetQunty.getText());
+        }
+
 
         if(available>=iget && iget>0 && !txtID.getText().isEmpty()){
             intobilltable();
@@ -279,5 +278,9 @@ public void lbltotlisvi(Boolean x){
         stage.show();
         btnshowbil.setDisable(false);
 
+    }
+
+    public void clr(){
+        tblview.getSelectionModel().clearSelection();
     }
 }

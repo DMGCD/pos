@@ -55,9 +55,9 @@ public class itemformcontroller {
 
                 itemtable selectedItem = tblitem.getSelectionModel().getSelectedItem();
                 if(!subrootremove.isDisable()){
-
-                    tblitem.refresh();
                     txtremoveitemid.setText(selectedItem.getId());
+                    tblitem.refresh();
+
                 }
             }
         });
@@ -159,8 +159,9 @@ public class itemformcontroller {
     public void btnremoveinpaneOnAction(ActionEvent actionEvent) {
         if(!txtremoveitemid.getText().isEmpty()){
             removemethod();
-            afterremovetablerefresh();
             tblitem.getSelectionModel().clearSelection();
+            afterremovetablerefresh();
+
 
 
 

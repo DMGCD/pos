@@ -3,6 +3,7 @@ package controller;
 import TM.tblshowTM;
 import db.DB;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -10,11 +11,13 @@ import java.sql.*;
 
 public class showbillformcontroller {
     public TableView<tblshowTM> tblshow;
+    public Label lblbilidshowbill;
 
     public void initialize(){
         columntbl();
         loadshow();
         tblshow.refresh();
+        lblbilidshowbill.setText(workformcontroller.bid);
 
 
 
@@ -38,7 +41,7 @@ public class showbillformcontroller {
             while(resultSet.next()){
 
                 String name =resultSet.getString(5);
-                int quantity =Integer.parseInt(resultSet.getString(6));
+                int quantity =Integer.parseInt(resultSet.getString(7));
                 ObservableList<tblshowTM> items = tblshow.getItems();
                 items.add(new tblshowTM(name,quantity));
                 tblshow.refresh();
