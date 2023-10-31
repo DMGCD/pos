@@ -11,12 +11,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Objects;
 import java.util.Optional;
 
 public class itemformcontroller {
@@ -40,9 +42,12 @@ public class itemformcontroller {
     public TextField txtnewQuantity;
     public TextField txtnewprice;
     public TextField txtNewname;
+    public Pane subrootUpdate;
+    String newItemID;
 
 
     public void initialize(){
+        subrootUpdate.setDisable(true);
         subrootaddnew.setDisable(true);
         subrootremove.setDisable(true);
         btncanceladd.setDisable(true);
@@ -57,10 +62,26 @@ public class itemformcontroller {
             public void changed(ObservableValue<? extends itemtable> observable, itemtable oldValue, itemtable newValue) {
 
                 itemtable selectedItem = tblitem.getSelectionModel().getSelectedItem();
-                if(!subrootremove.isDisable()){
-                    txtremoveitemid.setText(selectedItem.getId());
-                    tblitem.refresh();
 
+                if(selectedItem!=null){
+                    if(!subrootremove.isDisable()){
+                        subrootUpdate.setDisable(true);
+                        txtremoveitemid.setText(selectedItem.getId());
+                        tblitem.refresh();
+
+                    }
+                    else if(!subrootUpdate.isDisable()){
+                        subrootremove.setDisable(true);
+                        
+
+                        newItemID=selectedItem.getId();
+                        txtNewname.setText(selectedItem.getName());
+                        String price = selectedItem.getPrice();
+                        txtnewprice.setText(price);
+                         txtnewQuantity.setText(selectedItem.getQuantity());
+
+
+                    }
                 }
             }
         });
@@ -68,10 +89,53 @@ public class itemformcontroller {
 
 
     }
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        subrootUpdate.setDisable(false);
+
+
+
+    }
+    public void btnUpdataINSubrootONAction(ActionEvent actionEvent) {
+
+        String itemNameNew = txtNewname.getText();
+        String itemNewQuantity = txtnewQuantity.getText();
+        String newPrice = txtnewprice.getText();
+        Connection connection = DB.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("update item set iname=?,price=?,qunty=?,totalPrice=? where itemid=? ");
+            preparedStatement.setObject(1,itemNameNew);
+            preparedStatement.setObject(2,Integer.parseInt(newPrice));
+            preparedStatement.setObject(3,Integer.parseInt(itemNewQuantity));
+            preparedStatement.setObject(4,Integer.parseInt(itemNewQuantity)*Integer.parseInt(newPrice));
+            preparedStatement.setObject(5,newItemID);
+            preparedStatement.executeUpdate();
+            tblitem.refresh();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        loadtableitem();
+       UpdateClear();
+        clr();
+
+
+    }
+public void UpdateClear(){
+        txtNewname.clear();
+        txtnewprice.clear();
+        txtnewQuantity.clear();
+    }
+    public void btnCancelInSubrootOnAction(ActionEvent actionEvent) {
+        subrootUpdate.setDisable(true);
+        UpdateClear();
+        loadtableitem();
+
+    }
 
     public void btngoback(ActionEvent actionEvent) throws IOException {
 
-        Parent parent = FXMLLoader.load(this.getClass().getResource("../veiw/hostform.fxml"));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/hostform.fxml")));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) root.getScene().getWindow();
         stage.setScene(scene);
@@ -125,6 +189,7 @@ public class itemformcontroller {
     public void btnAddnewOnAction(ActionEvent actionEvent) {
         subrootaddnew.setDisable(false);
         btncanceladd.setDisable(false);
+        loadtableitem();
         tblitem.getSelectionModel().clearSelection();
 
 
@@ -137,10 +202,13 @@ public class itemformcontroller {
         tblitem.setDisable(false);
         txtremoveitemid.requestFocus();
         tblitem.refresh();
-        tblitem.getSelectionModel().clearSelection();
+        clr();
 
     }
+    public void clr(){
 
+        tblitem.getSelectionModel().clearSelection();
+    }
     public void txtremoveitemidOnAction(ActionEvent actionEvent) {
         if(!txtremoveitemid.getText().isEmpty()){
             removemethod();
@@ -341,7 +409,7 @@ public class itemformcontroller {
     
     public void loadtableitem(){
         int itemCount = 0,i=1;
-
+        tblitem.getItems().clear();
         Connection connection = DB.getInstance().getConnection();
 
         try {
@@ -433,10 +501,6 @@ public class itemformcontroller {
     }
 
 
-    public void btnUpdataINSubrootONAction(ActionEvent actionEvent) {
-    }
 
-    public void btnCancelInSubrootOnAction(ActionEvent actionEvent) {
-    }
 }
 

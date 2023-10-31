@@ -22,34 +22,37 @@ import java.util.Objects;
 public class workformcontroller {
 
 
-    public TableView<tableviewTM> tblview;
+    public   TableView<tableviewTM> tblview;
     public AnchorPane root;
     public Pane subroot;
     public TextField txtgetQunty;
     public TextField txtID;
     public static  String bid;
-    public Label lblAvailble;
+
     public Label lbltotal;
-    public Label lblpricelbl;
+
     public Button btnshowbil;
     public Label lblbillid;
+    public Label lblAvilableshow;
     int priceget;
     String iname;
     int available;
     int iget;
     String selectID;
-    int balance;
-int sum;
+
+
+public static int getQunatity;
     public void initialize(){
+
         definecolumn();
         lblbillid.setText("000");
         btnshowbil.setDisable(true);
-        lbltotal.setText("0");
+
         loadTable();
         tblview.setDisable(true);
         txtID.setDisable(true);
         subroot.setVisible(false);
-        lbltotlisvi(false);
+
         tblview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<tableviewTM>() {
             @Override
             public void changed(ObservableValue<? extends tableviewTM> observable, tableviewTM oldValue, tableviewTM newValue) {
@@ -60,7 +63,7 @@ int sum;
                     iname =select.getName();
                     txtID.setText(select.getId());
                     selectID=select.getId();
-                    lblAvailble.setText(Integer.toString(select.getQunty()));
+                    lblAvilableshow.setText(Integer.toString(select.getQunty()));
                     txtgetQunty.requestFocus();
                     tblview.refresh();
 
@@ -112,15 +115,15 @@ public void loadTable(){
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) {
+
         btnshowbil.setDisable(false);
-        lbltotal.setText("0000");
-        lbltotal.autosize();
-        lbltotlisvi(true);
         bid =idgenarateBIl();
         lblbillid.setText(bid);
         subroot.setVisible(true);
         tblview.setDisable(false);
-        sum=0;
+
+        tblview.getItems().clear();
+        loadTable();
     }
 // new one bill ad the bil table;
     public void btnaddONaction(ActionEvent actionEvent) {
@@ -138,7 +141,7 @@ public void loadTable(){
 // insert to bill table data
     public void intobilltable(){
         int balnce = iget*priceget;
-        int qunty;
+        int  qunty;
         Connection connection = DB.getInstance().getConnection();
         try {
             if(!txtgetQunty.getText().isEmpty() && Integer.parseInt(txtgetQunty.getText())!=0){
@@ -212,13 +215,12 @@ public void loadTable(){
             intobilltable();
             txtID.clear();
             txtgetQunty.clear();
-            lblAvailble.setText("0");
+            lblAvilableshow.setText("0");
             tblview.requestFocus();
             updateItemTable();
+           // totalbalnce();
 
-            totalbalnce();
-            sum+=balance;
-            lbltotal.setText(Integer.toString(sum));
+
 
 
 
@@ -230,21 +232,25 @@ public void loadTable(){
             txtgetQunty.clear();
             txtgetQunty.requestFocus();
         }
+
+        tblview.getItems().clear();
+        loadTable();
     }
 public void updateItemTable(){
-
+    int rqunty;
     Connection connection = DB.getInstance().getConnection();
     try {
         PreparedStatement preparedStatement = connection.prepareStatement("update item set rqunty=? where itemid=?");
-        int rqunty =available-iget;
+         rqunty =available-iget;
         preparedStatement.setObject(1,rqunty);
         preparedStatement.setObject(2,selectID);
         preparedStatement.executeUpdate();
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
+    getQunatity=rqunty;
 }
-
+/*
 public void totalbalnce(){
 
     Connection connection = DB.getInstance().getConnection();
@@ -261,14 +267,11 @@ public void totalbalnce(){
         throw new RuntimeException(e);
     }
 
+}*/
 
-}
-public void lbltotlisvi(Boolean x){
-        lbltotal.setVisible(x);
-        lblpricelbl.setVisible(x);
-}
 
-// ****************** Show bill button
+
+    // ****************** Show bill button
     public void btnOnactionShowbil(ActionEvent actionEvent) throws IOException {
         Parent parent =FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("../veiw/showbillform.fxml")));
         Scene scene = new Scene(parent);
@@ -281,6 +284,7 @@ public void lbltotlisvi(Boolean x){
     }
 
     public void clr(){
+
         tblview.getSelectionModel().clearSelection();
     }
 }

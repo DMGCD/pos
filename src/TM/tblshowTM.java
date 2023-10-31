@@ -2,18 +2,29 @@ package TM;
 
 public class tblshowTM {
 
-    private String name;
-    private int quantity;
+   private String ItemID;
+   private String name;
 
     public tblshowTM() {
     }
 
-    public tblshowTM(String name, int quantity) {
+    private int  quntity;
+
+    public tblshowTM(String itemID, String name, int quntity) {
+        ItemID = itemID;
         this.name = name;
-        this.quantity = quantity;
+        this.quntity = quntity;
     }
 
 
+
+    public String getItemID() {
+        return ItemID;
+    }
+
+    public void setItemID(String itemID) {
+        ItemID = itemID;
+    }
 
     public String getName() {
         return name;
@@ -23,11 +34,11 @@ public class tblshowTM {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getQuntity() {
+        return quntity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setQuntity(int quntity) {
+        this.quntity = quntity;
     }
 }

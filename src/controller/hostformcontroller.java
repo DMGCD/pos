@@ -246,8 +246,7 @@ public void initializeColumn(){
         lstmsg.refresh();
     }
 
+
     public void btnUpdatOnAction(MouseEvent mouseEvent) {
-
-
     }
 }

@@ -1,19 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.showbillformcontroller">
+<AnchorPane prefHeight="601.0" prefWidth="364.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.showbillformcontroller">
    <children>
-      <TableView fx:id="tblshow" layoutX="9.0" layoutY="27.0" prefHeight="317.0" prefWidth="225.0">
+      <TableView fx:id="tblshow" layoutX="17.0" layoutY="72.0" prefHeight="317.0" prefWidth="244.0">
         <columns>
-          <TableColumn prefWidth="148.0" text="name" />
-          <TableColumn prefWidth="76.0" text="Quantity" />
+          <TableColumn prefWidth="38.0" text="ID" />
+            <TableColumn prefWidth="132.0" text="Name" />
+          <TableColumn prefWidth="75.0" text="Quantity" />
         </columns>
       </TableView>
-      <Label fx:id="lblbilidshowbill" layoutX="259.0" layoutY="14.0" text="Bill ID" />
+      <Label fx:id="lblbilidshowbill" layoutX="281.0" layoutY="14.0" prefHeight="25.0" prefWidth="44.0" text="Bill ID">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Pane fx:id="subrootBillUpdate" layoutX="14.0" layoutY="408.0" prefHeight="101.0" prefWidth="310.0" style="-fx-border-color: black; -fx-border-radius: 5px;">
+         <children>
+            <Button layoutX="123.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnChangeOnAction" text="Change">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="237.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnCancleOnAction" text="Cancle">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="txtQuantityCange" layoutX="14.0" layoutY="26.0" prefHeight="25.0" prefWidth="166.0" />
+            <Button layoutX="53.0" layoutY="62.0" mnemonicParsing="false" onAction="#btnRemoveItemBIllOnAction" text="Remove" />
+         </children>
+      </Pane>
+      <Button fx:id="btnPrint" layoutX="276.0" layoutY="550.0" mnemonicParsing="false" onAction="#btnPrintOnAction" style="-fx-background-color: blue;" text="Print" textFill="#f5f2f2">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="105.0" layoutY="5.0" text="Bill ">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="177.0" layoutY="49.0" text="Total Price : R.S. ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblpriceTotal" layoutX="276.0" layoutY="49.0" prefHeight="17.0" prefWidth="38.0" text="Price">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
