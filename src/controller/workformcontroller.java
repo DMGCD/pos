@@ -118,7 +118,7 @@ public void loadTable(){
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) {
-        btnRefresh.setDisable(true);
+        btnRefresh.setDisable(false);
         btnshowbil.setDisable(false);
         bid =idgenarateBIl();
         lblbillid.setText(bid);
