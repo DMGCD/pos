@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="root" prefHeight="462.0" prefWidth="684.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.hostformcontroller">
    <children>
-      <Pane layoutX="320.0" layoutY="70.0" prefHeight="113.0" prefWidth="359.0" style="-fx-border-color: black;" />
+      <Pane layoutX="320.0" layoutY="70.0" prefHeight="113.0" prefWidth="359.0" style="-fx-border-color: black; -fx-border-radius: 20px;" />
       <Pane fx:id="subroot" layoutX="440.0" layoutY="251.0" prefHeight="198.0" prefWidth="239.0" style="-fx-border-color: black;">
          <children>
             <Label layoutX="6.0" layoutY="6.0" text="Update Username And Password ">
@@ -82,7 +82,7 @@
       </Group>
       <Group>
          <children>
-            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="477.0" layoutY="79.0" onMouseClicked="#btnEmployeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="456.0" layoutY="79.0" onMouseClicked="#btnEmployeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/download.jpeg" />
                </image>
@@ -90,7 +90,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="500.0" layoutY="148.0" onMouseClicked="#btnEmployeOnMouseClicked" text="Employe">
+            <Label layoutX="479.0" layoutY="148.0" onMouseClicked="#btnEmployeOnMouseClicked" text="Employe">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -104,7 +104,7 @@
          <children>
             <Group layoutY="5.0">
                <children>
-                  <ImageView fitHeight="68.0" fitWidth="65.0" layoutX="404.0" layoutY="88.0" onMouseClicked="#btnItemimageMouseOnAction" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="68.0" fitWidth="65.0" layoutX="354.0" layoutY="88.0" onMouseClicked="#btnItemimageMouseOnAction" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/items.jpeg" />
                      </image>
@@ -112,7 +112,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Label layoutX="424.0" layoutY="148.0" onMouseClicked="#btnItemimageMouseOnAction" text="Item ">
+                  <Label layoutX="374.0" layoutY="148.0" onMouseClicked="#btnItemimageMouseOnAction" text="Item ">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -124,26 +124,7 @@
             </Group>
          </children>
       </Group>
-      <Group>
-         <children>
-            <ImageView fitHeight="77.0" fitWidth="65.0" layoutX="328.0" layoutY="94.0" onDragDetected="#btnUpdatOnAction" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Image/1.jpg" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <Label layoutX="342.0" layoutY="147.0" onDragDetected="#btnUpdatOnAction" text="Update">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </children>
-      </Group>
+      <Group />
       <Label layoutX="7.0" layoutY="109.0" text="Available Item " />
       <TableView fx:id="tblHostView" layoutX="4.0" layoutY="126.0" prefHeight="326.0" prefWidth="257.0">
         <columns>
