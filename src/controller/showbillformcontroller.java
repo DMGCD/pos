@@ -20,10 +20,12 @@ public class showbillformcontroller {
     public TextField txtQuantityCange;
 public String itemId;
 public int priceNew;
-
+    int changeNEwQunatity;
     public Label lblpriceTotal;
     public int quantityBill;
     public int quantityItem;
+    public int removeQuantity;
+    public int selectedQuntity;
 int sum;
     public void initialize(){
         setTotalPrice();
@@ -41,6 +43,7 @@ int sum;
 
                 if(selectedItem!=null){
                     txtQuantityCange.setText(Integer.toString(selectedItem.getQuntity()));
+                    selectedQuntity =selectedItem.getQuntity();
                     itemId= selectedItem.getItemID();
 
                     Connection connection = DB.getInstance().getConnection();
@@ -51,7 +54,9 @@ int sum;
                         ResultSet resultSet = preparedStatement.executeQuery();
                         while (resultSet.next()){
                             String string = resultSet.getString(4);
+                          removeQuantity = resultSet.getInt(5);
                             quantityItem= resultSet.getInt(3);
+
                             priceNew =Integer.parseInt(string);
 
                         }
@@ -104,15 +109,16 @@ int sum;
     public void btnChangeOnAction(ActionEvent actionEvent) {
 
         String text = txtQuantityCange.getText();
-        int QuntyNew= Integer.parseInt(text);
+         changeNEwQunatity= Integer.parseInt(text);
         String bid = workformcontroller.bid;
         Connection connection = DB.getInstance().getConnection();
-        int blance =QuntyNew* priceNew;
-        if(QuntyNew<=workformcontroller.getQunatity){
+        int blance =changeNEwQunatity* priceNew;
+
+        if(changeNEwQunatity<=selectedQuntity){
 
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement("update bil set qunty =? ,blance=? where bid=? and itemid=?   ");
-                preparedStatement.setObject(1,QuntyNew);
+                preparedStatement.setObject(1,changeNEwQunatity);
                 preparedStatement.setObject(2,blance);
                 preparedStatement.setObject(3,bid);
                 preparedStatement.setObject(4,itemId);
@@ -121,7 +127,7 @@ int sum;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            updateItemTable();
+
         }
         else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Is Larger Than Store Quntity!");
@@ -130,6 +136,7 @@ int sum;
             tblshow.getSelectionModel().clearSelection();
         }
         setTotalPrice();
+        updateItemChangeFunc();
         loadshow();
         tblshow.refresh();
 
@@ -166,7 +173,11 @@ int sum;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        updateItemTable();
+        String text = txtQuantityCange.getText();
+        int getQuantity=Integer.parseInt(text);
+
+
+        updateItemTableRemoveFun();
         setTotalPrice();
         txtQuantityCange.clear();
         subrootBillUpdate.setVisible(false);
@@ -193,11 +204,11 @@ int sum;
             throw new RuntimeException(e);
         }
     }
-    public void updateItemTable(){
+    public void updateItemTableRemoveFun(){
 
         Connection connection = DB.getInstance().getConnection();
         try {
-            int x=quantityItem-quantityBill;
+            int x=removeQuantity+quantityBill;
             PreparedStatement preparedStatement = connection.prepareStatement("update item set rqunty =? where itemid=?");
             preparedStatement.setObject(1,x);
             preparedStatement.setObject(2,itemId);
@@ -208,5 +219,18 @@ int sum;
         }
 
 
+    }
+    public void updateItemChangeFunc(){
+        Connection connection = DB.getInstance().getConnection();
+        try {
+            int x=removeQuantity +(selectedQuntity-changeNEwQunatity);
+            PreparedStatement preparedStatement = connection.prepareStatement("update item set rqunty =? where itemid=?");
+            preparedStatement.setObject(1,x);
+            preparedStatement.setObject(2,itemId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

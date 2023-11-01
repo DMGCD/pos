@@ -82,7 +82,7 @@
       </Group>
       <Group>
          <children>
-            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="477.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="95.0" fitWidth="93.0" layoutX="477.0" layoutY="79.0" onMouseClicked="#btnEmployeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Image/download.jpeg" />
                </image>
@@ -90,7 +90,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <Label layoutX="500.0" layoutY="148.0" text="Employe">
+            <Label layoutX="500.0" layoutY="148.0" onMouseClicked="#btnEmployeOnMouseClicked" text="Employe">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

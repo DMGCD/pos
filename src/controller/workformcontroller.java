@@ -29,25 +29,26 @@ public class workformcontroller {
     public TextField txtID;
     public static  String bid;
 
-    public Label lbltotal;
+
 
     public Button btnshowbil;
     public Label lblbillid;
     public Label lblAvilableshow;
+    public Button btnRefresh;
     int priceget;
     String iname;
     int available;
     int iget;
     String selectID;
-
+int getlblAvailable;
 
 public static int getQunatity;
     public void initialize(){
-
+        btnRefresh.setDisable(false);
         definecolumn();
         lblbillid.setText("000");
         btnshowbil.setDisable(true);
-
+        updateItemTable();
         loadTable();
         tblview.setDisable(true);
         txtID.setDisable(true);
@@ -64,6 +65,8 @@ public static int getQunatity;
                     txtID.setText(select.getId());
                     selectID=select.getId();
                     lblAvilableshow.setText(Integer.toString(select.getQunty()));
+                    String text = lblAvilableshow.getText();
+                    getlblAvailable =Integer.parseInt(text);
                     txtgetQunty.requestFocus();
                     tblview.refresh();
 
@@ -115,7 +118,7 @@ public void loadTable(){
     }
 
     public void btnNewOnAction(ActionEvent actionEvent) {
-
+        btnRefresh.setDisable(true);
         btnshowbil.setDisable(false);
         bid =idgenarateBIl();
         lblbillid.setText(bid);
@@ -250,24 +253,7 @@ public void updateItemTable(){
     }
     getQunatity=rqunty;
 }
-/*
-public void totalbalnce(){
 
-    Connection connection = DB.getInstance().getConnection();
-    try {
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select *from bil order by id desc limit 1");
-
-        if(resultSet.next()){
-            String balnceprice = resultSet.getString(4);
-            balance =Integer.parseInt(balnceprice);
-
-        }
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
-
-}*/
 
 
 
@@ -286,5 +272,11 @@ public void totalbalnce(){
     public void clr(){
 
         tblview.getSelectionModel().clearSelection();
+    }
+
+    public void btnRefreshOnAction(ActionEvent actionEvent) {
+        tblview.getItems().clear();
+        loadTable();
+        tblview.refresh();
     }
 }

@@ -72,5 +72,10 @@
             </Lighting>
          </effect>
       </Button>
+      <Button fx:id="btnRefresh" layoutX="545.0" layoutY="97.0" mnemonicParsing="false" onAction="#btnRefreshOnAction" text="Refresh">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

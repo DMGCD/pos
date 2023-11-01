@@ -249,4 +249,13 @@ public void initializeColumn(){
 
     public void btnUpdatOnAction(MouseEvent mouseEvent) {
     }
+
+    public void btnEmployeOnMouseClicked(MouseEvent mouseEvent) throws IOException {
+
+        Parent parent=FXMLLoader.load(this.getClass().getResource("../veiw/dataEmployeForm.fxml"));
+        Scene scene = new Scene(parent);
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.setScene(scene);
+        stage.centerOnScreen();
+    }
 }
